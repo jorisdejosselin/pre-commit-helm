@@ -8,7 +8,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Package lock files (choose one)
-package-lock.json
+# package-lock.json - needed for GitHub Actions
 yarn.lock
 
 # Runtime data
