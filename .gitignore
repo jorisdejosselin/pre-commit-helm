@@ -99,3 +99,4 @@ CHANGELOG.md
 # Helm test charts (if created during testing)
 test-chart/
 example-chart/
+test-helm-repo/
