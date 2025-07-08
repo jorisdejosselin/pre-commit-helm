@@ -1,0 +1,8 @@
+# Minimal .pre-commit-config.yaml for Helm projects
+
+repos:
+  - repo: https://github.com/jorisdejosselin/pre-commit-helm
+    rev: v1.0.0
+    hooks:
+      - id: helm-lint
+      - id: helm-template

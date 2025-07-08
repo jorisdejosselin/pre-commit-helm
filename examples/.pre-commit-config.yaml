@@ -1,0 +1,45 @@
+# Example .pre-commit-config.yaml for Helm projects
+
+repos:
+  # Pre-commit hooks for Helm
+  - repo: https://github.com/jorisdejosselin/pre-commit-helm
+    rev: v1.0.0
+    hooks:
+      # Basic validation
+      - id: helm-lint
+        args: ['--strict']
+      
+      # Template validation
+      - id: helm-template
+        args: ['--debug']
+      
+      # Unit tests (only if you have tests)
+      - id: helm-unittest
+        args: ['--color']
+      
+      # Documentation generation
+      - id: helm-docs
+        args: ['--sort-values-order', 'file']
+      
+      # Security scanning
+      - id: helm-security
+        args: ['--severity', 'HIGH,CRITICAL']
+      
+      # Dependency management
+      - id: helm-dependency-update
+        args: ['--skip-refresh']
+      
+      # Kubernetes manifest validation
+      - id: helm-kubeval
+        args: ['--kubernetes-version', '1.28.0']
+
+  # Additional useful hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: mixed-line-ending

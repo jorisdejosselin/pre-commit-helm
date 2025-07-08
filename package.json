@@ -1,0 +1,44 @@
+{
+  "name": "pre-commit-helm",
+  "version": "0.0.0-development",
+  "description": "Pre-commit hooks for Helm charts",
+  "main": "index.js",
+  "scripts": {
+    "semantic-release": "semantic-release",
+    "commit": "git-cz",
+    "commitlint": "commitlint --edit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jorisdejosselin/pre-commit-helm.git"
+  },
+  "keywords": [
+    "helm",
+    "pre-commit",
+    "kubernetes",
+    "git-hooks",
+    "ci-cd",
+    "validation",
+    "security"
+  ],
+  "author": "jorisdejosselin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jorisdejosselin/pre-commit-helm/issues"
+  },
+  "homepage": "https://github.com/jorisdejosselin/pre-commit-helm#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.0",
+    "@commitlint/config-conventional": "^17.6.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "semantic-release": "^21.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
