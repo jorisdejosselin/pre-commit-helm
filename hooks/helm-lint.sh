@@ -3,8 +3,7 @@
 set -e
 
 # Script metadata (used for debugging if needed)
-readonly SCRIPT_DIR
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly HOOK_ID="helm-lint"
 
 function main() {
