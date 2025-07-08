@@ -3,7 +3,8 @@
 set -e
 
 # Script metadata (used for debugging if needed)
-readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly SCRIPT_DIR
 readonly HOOK_ID="helm-kubeval"
 
 function main() {
