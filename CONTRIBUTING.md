@@ -5,17 +5,20 @@ Thank you for your interest in contributing to pre-commit-helm! This document pr
 ## Development Setup
 
 1. **Fork and clone the repository**:
+
    ```bash
    git clone https://github.com/jorisdejosselin/pre-commit-helm.git
    cd pre-commit-helm
    ```
 
 2. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 3. **Install pre-commit for development**:
+
    ```bash
    pip install pre-commit
    pre-commit install
@@ -69,6 +72,7 @@ BREAKING CHANGE: The validation behavior has changed and may affect existing con
 ### Manual Testing
 
 1. **Create a test chart**:
+
    ```bash
    mkdir test-chart
    cd test-chart
@@ -76,6 +80,7 @@ BREAKING CHANGE: The validation behavior has changed and may affect existing con
    ```
 
 2. **Test individual hooks**:
+
    ```bash
    ../hooks/helm-lint.sh
    ../hooks/helm-template.sh
@@ -83,6 +88,7 @@ BREAKING CHANGE: The validation behavior has changed and may affect existing con
    ```
 
 3. **Test with pre-commit**:
+
    ```bash
    cat > .pre-commit-config.yaml << 'EOF'
    repos:
@@ -94,7 +100,7 @@ BREAKING CHANGE: The validation behavior has changed and may affect existing con
            language: script
            files: '(Chart\.yaml|values\.yaml|.*\.tpl)$'
    EOF
-   
+
    pre-commit run --all-files
    ```
 
@@ -112,12 +118,14 @@ The CI pipeline will automatically test your changes. You can run the same tests
 To add a new hook:
 
 1. **Create the hook script** in `hooks/`:
+
    ```bash
    touch hooks/helm-newfeature.sh
    chmod +x hooks/helm-newfeature.sh
    ```
 
 2. **Add hook definition** to `.pre-commit-hooks.yaml`:
+
    ```yaml
    - id: helm-newfeature
      name: Helm New Feature
@@ -152,7 +160,7 @@ readonly HOOK_ID="helm-newfeature"
 function main() {
   local -r hook_config="$*"
   local exit_code=0
-  
+
   # Check if required tools are installed
   if ! command -v required-tool &> /dev/null; then
     echo "Error: required-tool is not installed or not in PATH"
@@ -174,7 +182,7 @@ function main() {
   # Process each chart
   for chart_dir in "${charts[@]}"; do
     echo "Processing chart: $chart_dir"
-    
+
     # Your hook logic here
     if ! your-command "$chart_dir"; then
       echo "Hook failed for chart: $chart_dir"
@@ -186,7 +194,7 @@ function main() {
     echo "Hook failed for one or more charts"
     exit $exit_code
   fi
-  
+
   echo "Hook passed for all charts"
 }
 
@@ -206,6 +214,7 @@ main "$@"
 ## Pull Request Process
 
 1. **Create a feature branch**:
+
    ```bash
    git checkout -b feat/your-feature-name
    ```
@@ -215,11 +224,13 @@ main "$@"
 3. **Test your changes** thoroughly
 
 4. **Commit your changes** using conventional commits:
+
    ```bash
    npm run commit
    ```
 
 5. **Push to your fork**:
+
    ```bash
    git push origin feat/your-feature-name
    ```

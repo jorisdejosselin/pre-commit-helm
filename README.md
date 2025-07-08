@@ -57,7 +57,7 @@ This project uses [semantic-release](https://semantic-release.gitbook.io/) for a
 
 We use the [Angular Commit Message Conventions](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-format):
 
-```
+```text
 <type>(<scope>): <short summary>
   │       │             │
   │       │             └─⫸ Summary in present tense. Not capitalized. No period at the end.
@@ -100,6 +100,7 @@ BREAKING CHANGE: The validation rules have been updated and may cause existing c
 ### Development Workflow
 
 1. **Making commits**: Use `npm run commit` to create properly formatted commit messages:
+
    ```bash
    npm install  # Install dependencies
    npm run commit  # Interactive commit tool
@@ -244,7 +245,7 @@ repos:
 
 This tool works best with charts following the standard Helm structure:
 
-```
+```text
 mychart/
 ├── Chart.yaml
 ├── values.yaml

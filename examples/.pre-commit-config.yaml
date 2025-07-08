@@ -7,31 +7,31 @@ repos:
     hooks:
       # Basic validation
       - id: helm-lint
-        args: ['--strict']
-      
+        args: ["--strict"]
+
       # Template validation
       - id: helm-template
-        args: ['--debug']
-      
+        args: ["--debug"]
+
       # Unit tests (only if you have tests)
       - id: helm-unittest
-        args: ['--color']
-      
+        args: ["--color"]
+
       # Documentation generation
       - id: helm-docs
-        args: ['--sort-values-order', 'file']
-      
+        args: ["--sort-values-order", "file"]
+
       # Security scanning
       - id: helm-security
-        args: ['--severity', 'HIGH,CRITICAL']
-      
+        args: ["--severity", "HIGH,CRITICAL"]
+
       # Dependency management
       - id: helm-dependency-update
-        args: ['--skip-refresh']
-      
+        args: ["--skip-refresh"]
+
       # Kubernetes manifest validation
       - id: helm-kubeval
-        args: ['--kubernetes-version', '1.28.0']
+        args: ["--kubernetes-version", "1.28.0"]
 
   # Additional useful hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks

@@ -6,32 +6,38 @@ repos:
     hooks:
       # Validation hooks
       - id: helm-lint
-        args: ['--strict']
+        args: ["--strict"]
         stages: [commit, push]
-      
+
       - id: helm-template
-        args: ['--debug']
+        args: ["--debug"]
         stages: [commit, push]
-      
+
       # Testing hooks
       - id: helm-unittest
-        args: ['--color', '--output-type', 'JUnit']
+        args: ["--color", "--output-type", "JUnit"]
         stages: [commit]
-      
+
       # Security and compliance
       - id: helm-security
-        args: ['--severity', 'HIGH,CRITICAL', '--format', 'json']
+        args: ["--severity", "HIGH,CRITICAL", "--format", "json"]
         stages: [push]
-      
+
       - id: helm-kubeval
-        args: ['--kubernetes-version', '1.28.0', '--strict']
+        args: ["--kubernetes-version", "1.28.0", "--strict"]
         stages: [push]
-      
+
       # Documentation and dependencies
       - id: helm-docs
-        args: ['--sort-values-order', 'file', '--template-files', 'README.md.gotmpl']
+        args:
+          [
+            "--sort-values-order",
+            "file",
+            "--template-files",
+            "README.md.gotmpl",
+          ]
         stages: [commit]
-      
+
       - id: helm-dependency-update
         stages: [commit]
 
@@ -42,12 +48,12 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
-        args: ['--allow-multiple-documents']
+        args: ["--allow-multiple-documents"]
       - id: check-added-large-files
-        args: ['--maxkb=1000']
+        args: ["--maxkb=1000"]
       - id: check-merge-conflict
       - id: mixed-line-ending
-        args: ['--fix=lf']
+        args: ["--fix=lf"]
 
   # YAML formatting
   - repo: https://github.com/pre-commit/mirrors-prettier

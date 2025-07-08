@@ -2,13 +2,15 @@
 
 set -e
 
-readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Script metadata (used for debugging if needed)
+readonly SCRIPT_DIR
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly HOOK_ID="helm-unittest"
 
 function main() {
   local -r hook_config="$*"
   local exit_code=0
-  
+
   # Check if helm is installed
   if ! command -v helm &> /dev/null; then
     echo "Error: helm is not installed or not in PATH"
@@ -25,6 +27,7 @@ function main() {
   # Find all Chart.yaml files to determine chart directories
   local charts=()
   while IFS= read -r -d '' chart_file; do
+    local chart_dir
     chart_dir=$(dirname "$chart_file")
     # Only include charts that have tests directory
     if [ -d "$chart_dir/tests" ]; then
@@ -39,7 +42,7 @@ function main() {
 
   # Parse arguments
   local args=()
-  
+
   for arg in $hook_config; do
     args+=("$arg")
   done
@@ -47,7 +50,7 @@ function main() {
   # Run helm unittest on each chart
   for chart_dir in "${charts[@]}"; do
     echo "Running helm unittest on chart: $chart_dir"
-    
+
     # Update dependencies if Chart.lock exists or dependencies are defined
     if [ -f "$chart_dir/Chart.lock" ] || grep -q "dependencies:" "$chart_dir/Chart.yaml" 2>/dev/null; then
       echo "Updating dependencies for chart: $chart_dir"
@@ -55,16 +58,16 @@ function main() {
         echo "Warning: Failed to update dependencies for chart: $chart_dir"
       fi
     fi
-    
+
     local unittest_cmd="helm unittest"
-    
+
     # Add any additional arguments
     for arg in "${args[@]}"; do
       unittest_cmd="$unittest_cmd $arg"
     done
-    
+
     unittest_cmd="$unittest_cmd $chart_dir"
-    
+
     if ! eval "$unittest_cmd"; then
       echo "helm unittest failed for chart: $chart_dir"
       exit_code=1
@@ -77,7 +80,7 @@ function main() {
     echo "helm unittest failed for one or more charts"
     exit $exit_code
   fi
-  
+
   echo "helm unittest passed for all charts"
 }
 

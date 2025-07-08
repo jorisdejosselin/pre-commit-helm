@@ -1,0 +1,19 @@
+[core]
+  sshCommand = ssh.exe
+  #hooksPath = /home/josse501/.kpn-global-git-hooks
+[user]
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAXCwEGhOsNUbmtePdgd5c7+fEkUBQLtduvJJzxQKxEz
+	email = joris.dejosselin@kpn.com
+	name = Joris de Josselin de Jong
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/mnt/c/Users/josse501/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
+
+[commit]
+  gpgsign = true
+
+[push]
+  autoSetupRemote = true

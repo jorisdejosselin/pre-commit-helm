@@ -2,13 +2,15 @@
 
 set -e
 
-readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Script metadata (used for debugging if needed)
+readonly SCRIPT_DIR
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly HOOK_ID="helm-docs"
 
 function main() {
   local -r hook_config="$*"
   local exit_code=0
-  
+
   # Check if helm-docs is installed
   if ! command -v helm-docs &> /dev/null; then
     echo "Error: helm-docs is not installed or not in PATH"
@@ -19,6 +21,7 @@ function main() {
   # Find all Chart.yaml files to determine chart directories
   local charts=()
   while IFS= read -r -d '' chart_file; do
+    local chart_dir
     chart_dir=$(dirname "$chart_file")
     charts+=("$chart_dir")
   done < <(find . -name "Chart.yaml" -type f -print0)
@@ -30,7 +33,7 @@ function main() {
 
   # Parse arguments
   local args=()
-  
+
   for arg in $hook_config; do
     args+=("$arg")
   done
@@ -38,17 +41,17 @@ function main() {
   # Run helm-docs on each chart
   for chart_dir in "${charts[@]}"; do
     echo "Running helm-docs on chart: $chart_dir"
-    
+
     local docs_cmd="helm-docs"
-    
+
     # Add chart directory
     docs_cmd="$docs_cmd --chart-search-root=$chart_dir"
-    
+
     # Add any additional arguments
     for arg in "${args[@]}"; do
       docs_cmd="$docs_cmd $arg"
     done
-    
+
     if ! eval "$docs_cmd"; then
       echo "helm-docs failed for chart: $chart_dir"
       exit_code=1
@@ -61,7 +64,7 @@ function main() {
     echo "helm-docs failed for one or more charts"
     exit $exit_code
   fi
-  
+
   echo "helm-docs completed for all charts"
 }
 

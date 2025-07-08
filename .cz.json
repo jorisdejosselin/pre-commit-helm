@@ -1,12 +1,12 @@
 {
   "commitizen": {
-    "path": "cz-conventional-changelog",
-    "maxHeaderWidth": 100,
-    "maxLineWidth": 100,
-    "defaultType": "",
+    "defaultBody": "",
+    "defaultIssues": "",
     "defaultScope": "",
     "defaultSubject": "",
-    "defaultBody": "",
-    "defaultIssues": ""
+    "defaultType": "",
+    "maxHeaderWidth": 100,
+    "maxLineWidth": 100,
+    "path": "cz-conventional-changelog"
   }
 }
