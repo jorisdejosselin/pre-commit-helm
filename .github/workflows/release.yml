@@ -16,6 +16,10 @@ jobs:
       pull-requests: write
       id-token: write
     steps:
+      - name: Debug info
+        run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "Head commit message: ${{ github.event.head_commit.message }}"ß
       - name: Checkout
         uses: actions/checkout@v4
         with:

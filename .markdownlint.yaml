@@ -1,4 +1,3 @@
-# Testpipe
 # Markdownlint configuration
 extends: null
 rules:
