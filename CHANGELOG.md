@@ -1,3 +1,10 @@
+# [1.1.0-beta.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.0...v1.1.0-beta.1) (2025-07-09)
+
+
+### Features
+
+* Add testing with the test-helm-repo ([3872cac](https://github.com/jorisdejosselin/pre-commit-helm/commit/3872cacba1e16c0be449e741b565633c9e43c09f))
+
 # 1.0.0-beta.1 (2025-07-09)
 
 
