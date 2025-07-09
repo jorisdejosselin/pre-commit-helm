@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0...v1.1.1) (2025-07-09)
+
+
+### Bug Fixes
+
+* CI test pipeline ([#3](https://github.com/jorisdejosselin/pre-commit-helm/issues/3)) ([e4d3315](https://github.com/jorisdejosselin/pre-commit-helm/commit/e4d3315c81df95ecbe2ba90a46e76d0cfc2010c8))
+
 # [1.1.0](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.0...v1.1.0) (2025-07-09)
 
 
