@@ -7,9 +7,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Package lock files (choose one)
-# package-lock.json - needed for GitHub Actions
-yarn.lock
+# Package lock files
+yarn.lock  # Not using yarn
+# package-lock.json - KEEP this file for reproducible builds
 
 # Runtime data
 pids
@@ -63,6 +63,9 @@ temp/
 .DS_Store
 .DS_Store?
 ._*
+.AppleDouble
+.LSOverride
+Icon?
 .Spotlight-V100
 .Trashes
 ehthumbs.db
@@ -76,6 +79,8 @@ Thumbs.db
 *~
 .project
 .settings/
+*.sublime-project
+*.sublime-workspace
 
 # Backup files
 *.bak
@@ -92,6 +97,7 @@ build/
 
 # Semantic release generated files
 CHANGELOG.md
+.semantic-release-cache/
 
 # Pre-commit cache
 .pre-commit-cache/
@@ -100,3 +106,8 @@ CHANGELOG.md
 test-chart/
 example-chart/
 test-helm-repo/
+
+# Helm artifacts
+Chart.lock
+charts/
+*.tgz
