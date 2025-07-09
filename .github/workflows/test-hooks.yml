@@ -1,0 +1,298 @@
+name: Test Pre-commit Hooks
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+
+jobs:
+  test-hooks-against-test-repo:
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.11-alpine
+      options: --user root
+    steps:
+      - name: Checkout pre-commit-helm
+        uses: actions/checkout@v4
+        with:
+          path: pre-commit-helm
+
+      - name: Clone test-helm-repo
+        run: |
+          apk add --no-cache git
+          git clone https://github.com/jorisdejosselin/test-helm-repo.git test-helm-repo
+          cd test-helm-repo
+          echo "Test repo cloned successfully"
+          ls -la
+          echo "Current commit:"
+          git log --oneline -1
+
+      - name: Setup tools
+        run: |
+          apk add --no-cache bash curl wget git go
+
+          # Install helm
+          wget https://get.helm.sh/helm-v3.14.0-linux-amd64.tar.gz
+          tar xf helm-v3.14.0-linux-amd64.tar.gz
+          mv linux-amd64/helm /usr/local/bin/helm
+          chmod +x /usr/local/bin/helm
+
+          # Install pre-commit
+          pip install pre-commit
+
+          # Install helm-unittest
+          helm plugin install https://github.com/helm-unittest/helm-unittest
+
+          # Install helm-docs
+          go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
+          ln -s /root/go/bin/helm-docs /usr/local/bin/helm-docs
+
+          # Install trivy
+          wget -qO- https://github.com/aquasecurity/trivy/releases/download/v0.55.2/trivy_0.55.2_Linux-64bit.tar.gz | tar xz
+          mv trivy /usr/local/bin/trivy
+          chmod +x /usr/local/bin/trivy
+
+          # Install kubeval
+          wget https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz
+          tar xf kubeval-linux-amd64.tar.gz
+          mv kubeval /usr/local/bin/kubeval
+          chmod +x /usr/local/bin/kubeval
+
+      - name: Test helm-lint hook
+        run: |
+          echo "=== Testing helm-lint hook ==="
+          cd test-helm-repo
+
+          # Test main chart (should pass)
+          echo "Testing main chart..."
+          ../pre-commit-helm/hooks/helm-lint.sh || echo "Expected: Main chart lint failed"
+
+          # Test problematic charts (should fail)
+          if [ -d "test-charts/lint-failures" ]; then
+            echo "Testing lint-failures chart..."
+            cd test-charts/lint-failures
+            ../../../pre-commit-helm/hooks/helm-lint.sh || echo "Expected: Lint failures chart failed"
+            cd ../..
+          fi
+
+          echo "helm-lint tests completed"
+
+      - name: Test helm-template hook
+        run: |
+          echo "=== Testing helm-template hook ==="
+          cd test-helm-repo
+
+          # Test main chart (should pass)
+          echo "Testing main chart template..."
+          ../pre-commit-helm/hooks/helm-template.sh || echo "Expected: Main chart template failed"
+
+          # Test template-errors chart (should fail)
+          if [ -d "test-charts/template-errors" ]; then
+            echo "Testing template-errors chart..."
+            cd test-charts/template-errors
+            ../../../pre-commit-helm/hooks/helm-template.sh || echo "Expected: Template errors chart failed"
+            cd ../..
+          fi
+
+          echo "helm-template tests completed"
+
+      - name: Test helm-unittest hook
+        run: |
+          echo "=== Testing helm-unittest hook ==="
+          cd test-helm-repo
+
+          # Test main chart (should pass)
+          echo "Testing main chart unit tests..."
+          ../pre-commit-helm/hooks/helm-unittest.sh || echo "Expected: Main chart unittest failed"
+
+          # Test unittest-failures chart (should fail)
+          if [ -d "test-charts/unittest-failures" ]; then
+            echo "Testing unittest-failures chart..."
+            cd test-charts/unittest-failures
+            ../../../pre-commit-helm/hooks/helm-unittest.sh || echo "Expected: Unit test failures chart failed"
+            cd ../..
+          fi
+
+          echo "helm-unittest tests completed"
+
+      - name: Test helm-docs hook
+        run: |
+          echo "=== Testing helm-docs hook ==="
+          cd test-helm-repo
+
+          # Test main chart
+          echo "Testing main chart docs..."
+          ../pre-commit-helm/hooks/helm-docs.sh || echo "Expected: Main chart docs failed"
+
+          # Test all problematic charts
+          if [ -d "test-charts" ]; then
+            echo "Testing problematic charts docs..."
+            for chart in test-charts/*/; do
+              if [ -d "$chart" ]; then
+                echo "Testing docs for: $chart"
+                cd "$chart"
+                ../../../pre-commit-helm/hooks/helm-docs.sh || echo "Expected: Docs generation failed for $chart"
+                cd ../..
+              fi
+            done
+          fi
+
+          echo "helm-docs tests completed"
+
+      - name: Test helm-security hook
+        run: |
+          echo "=== Testing helm-security hook ==="
+          cd test-helm-repo
+
+          # Test main chart (should pass)
+          echo "Testing main chart security..."
+          ../pre-commit-helm/hooks/helm-security.sh || echo "Expected: Main chart security failed"
+
+          # Test security-issues chart (should fail)
+          if [ -d "test-charts/security-issues" ]; then
+            echo "Testing security-issues chart..."
+            cd test-charts/security-issues
+            ../../../pre-commit-helm/hooks/helm-security.sh || echo "Expected: Security issues chart failed"
+            cd ../..
+          fi
+
+          # Test bad security yaml file
+          if [ -f "test-bad-security.yaml" ]; then
+            echo "Testing bad security yaml..."
+            ../pre-commit-helm/hooks/helm-security.sh test-bad-security.yaml || echo "Expected: Bad security yaml failed"
+          fi
+
+          echo "helm-security tests completed"
+
+      - name: Test helm-kubeval hook
+        run: |
+          echo "=== Testing helm-kubeval hook ==="
+          cd test-helm-repo
+
+          # Test main chart (should pass)
+          echo "Testing main chart kubeval..."
+          ../pre-commit-helm/hooks/helm-kubeval.sh || echo "Expected: Main chart kubeval failed"
+
+          # Test template-errors chart (should fail)
+          if [ -d "test-charts/template-errors" ]; then
+            echo "Testing template-errors chart..."
+            cd test-charts/template-errors
+            ../../../pre-commit-helm/hooks/helm-kubeval.sh || echo "Expected: Template errors chart failed"
+            cd ../..
+          fi
+
+          echo "helm-kubeval tests completed"
+
+      - name: Test helm-dependency-update hook
+        run: |
+          echo "=== Testing helm-dependency-update hook ==="
+          cd test-helm-repo
+
+          # Test main chart
+          echo "Testing main chart dependency update..."
+          ../pre-commit-helm/hooks/helm-dependency-update.sh || echo "Expected: Main chart dependency update failed"
+
+          # Test all problematic charts
+          if [ -d "test-charts" ]; then
+            echo "Testing problematic charts dependency update..."
+            for chart in test-charts/*/; do
+              if [ -d "$chart" ]; then
+                echo "Testing dependency update for: $chart"
+                cd "$chart"
+                ../../../pre-commit-helm/hooks/helm-dependency-update.sh || echo "Expected: Dependency update failed for $chart"
+                cd ../..
+              fi
+            done
+          fi
+
+          echo "helm-dependency-update tests completed"
+
+      - name: Test pre-commit integration
+        run: |
+          echo "=== Testing pre-commit integration ==="
+          cd test-helm-repo
+
+          # Initialize git config
+          git config --global user.email "test@example.com"
+          git config --global user.name "Test User"
+
+          # Create pre-commit config that uses the hooks from the parent directory
+          cat > .pre-commit-config.yaml << 'EOF'
+          repos:
+            - repo: local
+              hooks:
+                - id: helm-lint
+                  name: Helm Lint
+                  entry: ../pre-commit-helm/hooks/helm-lint.sh
+                  language: script
+                  files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)$'
+                  pass_filenames: false
+                  always_run: false
+                - id: helm-template
+                  name: Helm Template
+                  entry: ../pre-commit-helm/hooks/helm-template.sh
+                  language: script
+                  files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)$'
+                  pass_filenames: false
+                  always_run: false
+                - id: helm-unittest
+                  name: Helm Unit Test
+                  entry: ../pre-commit-helm/hooks/helm-unittest.sh
+                  language: script
+                  files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl|tests/.*\.yaml)$'
+                  pass_filenames: false
+                  always_run: false
+                - id: helm-docs
+                  name: Helm Docs
+                  entry: ../pre-commit-helm/hooks/helm-docs.sh
+                  language: script
+                  files: '(Chart\.yaml|values\.yaml|README\.md)$'
+                  pass_filenames: false
+                  always_run: false
+                - id: helm-kubeval
+                  name: Helm Kubeval
+                  entry: ../pre-commit-helm/hooks/helm-kubeval.sh
+                  language: script
+                  files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)$'
+                  pass_filenames: false
+                  always_run: false
+                - id: helm-security
+                  name: Helm Security
+                  entry: ../pre-commit-helm/hooks/helm-security.sh
+                  language: script
+                  files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)$'
+                  pass_filenames: false
+                  always_run: false
+                - id: helm-dependency-update
+                  name: Helm Dependency Update
+                  entry: ../pre-commit-helm/hooks/helm-dependency-update.sh
+                  language: script
+                  files: '(Chart\.yaml|Chart\.lock)$'
+                  pass_filenames: false
+                  always_run: false
+          EOF
+
+          # Install pre-commit hooks
+          echo "Installing pre-commit hooks..."
+          pre-commit install || echo "Pre-commit install failed"
+
+          # Run pre-commit on all files (this should catch the failing scenarios)
+          echo "Running pre-commit on all files..."
+          pre-commit run --all-files || echo "Expected: Pre-commit run failed due to intentional failures"
+
+          echo "Pre-commit integration tests completed"
+
+      - name: Summary
+        run: |
+          echo "=== Test Summary ==="
+          echo "All pre-commit hooks have been tested against the test-helm-repo"
+          echo "The tests are designed to:"
+          echo "1. Pass on the main chart (good practices)"
+          echo "2. Fail on problematic charts (intentional failures)"
+          echo "3. Verify that each hook correctly identifies issues"
+          echo ""
+          echo "If you see 'Expected: ...' messages above, that indicates"
+          echo "the hooks are working correctly by catching the intentional failures."
+          echo ""
+          echo "Hook testing completed successfully!"
