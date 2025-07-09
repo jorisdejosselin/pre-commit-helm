@@ -454,10 +454,9 @@ jobs:
           ln -s /root/go/bin/helm-docs /usr/local/bin/helm-docs
 
           # Install trivy
-          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | tee /etc/apk/keys/trivy.rsa.pub > /dev/null || true
-          echo "https://aquasecurity.github.io/trivy-repo/apk/edge/main" | tee -a /etc/apk/repositories
-          apk update
-          apk add trivy || true
+          wget -qO- https://github.com/aquasecurity/trivy/releases/download/v0.55.2/trivy_0.55.2_Linux-64bit.tar.gz | tar xz
+          mv trivy /usr/local/bin/trivy
+          chmod +x /usr/local/bin/trivy
 
           # Install kubeval
           wget https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz
