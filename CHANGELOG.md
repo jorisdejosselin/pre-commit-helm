@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.0...v1.1.0) (2025-07-09)
+
+
+### Bug Fixes
+
+* test pipeline ([96a3cb4](https://github.com/jorisdejosselin/pre-commit-helm/commit/96a3cb4753fe590d78c9a77621266ea525860765))
+
+
+### Features
+
+* Add testing with the test-helm-repo ([#1](https://github.com/jorisdejosselin/pre-commit-helm/issues/1)) ([d800c19](https://github.com/jorisdejosselin/pre-commit-helm/commit/d800c197f5044186feed68284f36e1beef034297)), closes [#2](https://github.com/jorisdejosselin/pre-commit-helm/issues/2)
+
 # [1.1.0-beta.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.0...v1.1.0-beta.1) (2025-07-09)
 
 
