@@ -1,3 +1,10 @@
+# [1.1.0-beta.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.1...v1.1.0-beta.2) (2025-07-09)
+
+
+### Bug Fixes
+
+* Do testing on beta releases ([8cf263e](https://github.com/jorisdejosselin/pre-commit-helm/commit/8cf263eac1e61411515678afefd14abc037d055b))
+
 # [1.1.0-beta.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.0...v1.1.0-beta.1) (2025-07-09)
 
 
