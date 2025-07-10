@@ -4,7 +4,7 @@
     "jorisdejosselin"
   ],
   "automerge": true,
-  "automergeStrategy": "merge",
+  "automergeStrategy": "auto",
   "automergeType": "pr",
   "baseBranches": [
     "develop"
