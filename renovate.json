@@ -15,6 +15,28 @@
   "commitMessagePrefix": "chore(deps): ",
   "commitMessageTopic": "{{depName}}",
   "configMigration": true,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^\\.pre-commit-config\\.yaml$/",
+        "/^.*\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\s+\\S+:\\s*[\"']?(?<currentValue>[^\\s\"']+)[\"']?"
+      ]
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^Dockerfile.*$/",
+        "/^\\.?docker-compose.*\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\s+[A-Z_]+\\s*[=:]\\s*[\"']?(?<currentValue>[^\\s\"']+)[\"']?"
+      ]
+    }
+  ],
   "dependencyDashboard": true,
   "dependencyDashboardAutoclose": true,
   "dependencyDashboardTitle": "\ud83d\udd04 Dependency Updates Dashboard",
@@ -26,10 +48,10 @@
     "docker-compose",
     "helm-values",
     "helmv3",
-    "regex"
+    "custom.regex"
   ],
   "extends": [
-    "config:base",
+    "config:recommended",
     "helpers:pinGitHubActionDigests"
   ],
   "ignorePresets": [
@@ -146,7 +168,9 @@
       ],
       "minimumReleaseAge": "0 days",
       "prPriority": 15,
-      "vulnerabilityAlerts": true
+      "vulnerabilityAlerts": {
+        "enabled": true
+      }
     },
     {
       "addLabels": [
@@ -169,26 +193,6 @@
   "pre-commit": {
     "enabled": true
   },
-  "regexManagers": [
-    {
-      "fileMatch": [
-        "^\\.pre-commit-config\\.yaml$",
-        "^.*\\.ya?ml$"
-      ],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\s+\\S+:\\s*[\"']?(?<currentValue>[^\\s\"']+)[\"']?"
-      ]
-    },
-    {
-      "fileMatch": [
-        "^Dockerfile.*$",
-        "^\\.?docker-compose.*\\.ya?ml$"
-      ],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\s+[A-Z_]+\\s*[=:]\\s*[\"']?(?<currentValue>[^\\s\"']+)[\"']?"
-      ]
-    }
-  ],
   "requiredStatusChecks": null,
   "reviewers": [
     "jorisdejosselin"
