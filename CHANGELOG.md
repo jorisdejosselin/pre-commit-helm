@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.3.0...v1.4.0) (2025-07-10)
+
+
+### Features
+
+* renovate [skip ci] ([3a25075](https://github.com/jorisdejosselin/pre-commit-helm/commit/3a250751416a2c733f7638add212cf89a2d6e0fc))
+
 # [1.3.0](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.2.1...v1.3.0) (2025-07-10)
 
 
