@@ -748,28 +748,28 @@ jobs:
           # Check that pre-commit caught the expected failures
           HOOKS_FAILED=0
 
-          if echo "$OUTPUT" | grep -q "helm-lint.*failed\|helm-lint.*error"; then
+          if echo "$OUTPUT" | grep -q "Helm Lint.*Failed\|helm-lint.*failed\|helm-lint.*error"; then
             echo "✅ Pre-commit caught helm-lint failures"
             HOOKS_FAILED=$((HOOKS_FAILED + 1))
           else
             echo "❌ Pre-commit did not catch helm-lint failures"
           fi
 
-          if echo "$OUTPUT" | grep -q "helm-template.*failed\|helm-template.*error"; then
+          if echo "$OUTPUT" | grep -q "Helm Template.*Failed\|helm-template.*failed\|helm-template.*error"; then
             echo "✅ Pre-commit caught helm-template failures"
             HOOKS_FAILED=$((HOOKS_FAILED + 1))
           else
             echo "❌ Pre-commit did not catch helm-template failures"
           fi
 
-          if echo "$OUTPUT" | grep -q "helm-unittest.*failed\|helm-unittest.*error"; then
+          if echo "$OUTPUT" | grep -q "Helm Unit Test.*Failed\|helm-unittest.*failed\|helm-unittest.*error"; then
             echo "✅ Pre-commit caught helm-unittest failures"
             HOOKS_FAILED=$((HOOKS_FAILED + 1))
           else
             echo "❌ Pre-commit did not catch helm-unittest failures"
           fi
 
-          if echo "$OUTPUT" | grep -q "helm-security.*failed\|helm-security.*error"; then
+          if echo "$OUTPUT" | grep -q "Helm Security.*Failed\|helm-security.*failed\|helm-security.*error"; then
             echo "✅ Pre-commit caught helm-security failures"
             HOOKS_FAILED=$((HOOKS_FAILED + 1))
           else
