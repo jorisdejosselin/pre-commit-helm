@@ -1,3 +1,40 @@
+# [1.1.0-beta.5](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.4...v1.1.0-beta.5) (2025-07-10)
+
+
+### Bug Fixes
+
+* new testing pipeline ([510d461](https://github.com/jorisdejosselin/pre-commit-helm/commit/510d461de1df9c2495e0e551600adc269dc132c0))
+
+# [1.1.0-beta.4](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.3...v1.1.0-beta.4) (2025-07-10)
+
+
+### Bug Fixes
+
+* new testing pipeline ([852d6f9](https://github.com/jorisdejosselin/pre-commit-helm/commit/852d6f92a5b7357591c7b0b85b3c04e094571530))
+
+# [1.1.0-beta.3](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.2...v1.1.0-beta.3) (2025-07-10)
+
+
+### Bug Fixes
+
+* new testing pipeline ([28363b1](https://github.com/jorisdejosselin/pre-commit-helm/commit/28363b1e2e715a9999e9a18d6f86daa98003d9a3))
+
+# [1.1.0-beta.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.1...v1.1.0-beta.2) (2025-07-10)
+
+
+### Bug Fixes
+
+* new testing pipeline ([0c54078](https://github.com/jorisdejosselin/pre-commit-helm/commit/0c540783ba80113dc1ed137a524e1a464e82ae65))
+
+# [1.1.0-beta.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.1-beta.1...v1.1.0-beta.1) (2025-07-10)
+
+
+### Features
+
+* add more comprehensive testing of helm hooks ([69b9e84](https://github.com/jorisdejosselin/pre-commit-helm/commit/69b9e84bd683bd801476cf22e5c5802cc51bc0da))
+
+## [1.0.1-beta.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.0...v1.0.1-beta.1) (2025-07-10)
+
 # 1.0.0 (2025-07-10)
 
 
