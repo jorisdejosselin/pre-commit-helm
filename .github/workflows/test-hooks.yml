@@ -581,7 +581,7 @@ jobs:
             # Check for specific expected errors (template errors should cause kubeval to fail)
             ERRORS_FOUND=0
 
-            if echo "$OUTPUT" | grep -q "template.*error\|rendering.*failed\|invalid.*yaml\|validation.*failed"; then
+            if echo "$OUTPUT" | grep -q "template.*error\|Failed to render templates\|rendering.*failed\|invalid.*yaml\|validation.*failed"; then
               echo "✅ Found expected error: template rendering or validation failure"
               ERRORS_FOUND=$((ERRORS_FOUND + 1))
             else
