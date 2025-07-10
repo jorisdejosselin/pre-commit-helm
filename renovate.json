@@ -155,14 +155,13 @@
       ],
       "prPriority": 6,
       "schedule": [
-        "on weekends"
+        "every weekend"
       ]
     }
   ],
   "prBodyTemplate": "This PR updates dependencies in the repository.\n\n{{#if hasReleaseNotes}}\n## Release Notes\n{{{releaseNotes}}}\n{{/if}}\n\n{{#if hasErrors}}\n## Errors\n{{{errors}}}\n{{/if}}\n\n---\n\n\ud83e\udd16 This PR was generated automatically by Renovate Bot.",
   "prConcurrentLimit": 5,
   "prHourlyLimit": 3,
-  "prTitle": "chore(deps): {{#if isMajor}}\u2b06\ufe0f major{{else if isMinor}}\ud83d\udce6 minor{{else if isPatch}}\ud83d\udd27 patch{{else if isPinDigest}}\ud83d\udccc pin{{else if isRollback}}\u23ea rollback{{/if}} update {{#if isSingleVersion}}{{depName}} to {{newVersion}}{{else}}dependencies{{/if}}",
   "pre-commit": {
     "enabled": true
   },
@@ -190,7 +189,7 @@
     "jorisdejosselin"
   ],
   "schedule": [
-    "after 2am and before 6am on weekdays"
+    "after 2am and before 6am every weekday"
   ],
   "semanticCommitScope": "deps",
   "semanticCommitType": "chore",
