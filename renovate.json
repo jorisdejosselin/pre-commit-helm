@@ -1,0 +1,207 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "assignees": [
+    "jorisdejosselin"
+  ],
+  "automerge": true,
+  "automergeStrategy": "auto",
+  "automergeType": "pr",
+  "baseBranches": [
+    "develop"
+  ],
+  "branchConcurrentLimit": 10,
+  "commitMessageAction": "update",
+  "commitMessageExtra": "to {{newValue}}",
+  "commitMessagePrefix": "chore(deps): ",
+  "commitMessageTopic": "{{depName}}",
+  "configMigration": true,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^\\.pre-commit-config\\.yaml$/",
+        "/^.*\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\s+\\S+:\\s*[\"']?(?<currentValue>[^\\s\"']+)[\"']?"
+      ]
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^Dockerfile.*$/",
+        "/^\\.?docker-compose.*\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\s+[A-Z_]+\\s*[=:]\\s*[\"']?(?<currentValue>[^\\s\"']+)[\"']?"
+      ]
+    }
+  ],
+  "dependencyDashboard": true,
+  "dependencyDashboardAutoclose": true,
+  "dependencyDashboardTitle": "\ud83d\udd04 Dependency Updates Dashboard",
+  "description": "Renovate configuration for jorisdejosselin/pre-commit-helm repository",
+  "enabledManagers": [
+    "pre-commit",
+    "github-actions",
+    "dockerfile",
+    "docker-compose",
+    "helm-values",
+    "helmv3",
+    "custom.regex"
+  ],
+  "extends": [
+    "config:recommended",
+    "helpers:pinGitHubActionDigests"
+  ],
+  "ignorePresets": [
+    ":prHourlyLimit2"
+  ],
+  "ignoreTests": true,
+  "labels": [
+    "dependencies"
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "before 6am on the first day of the month"
+    ]
+  },
+  "osvVulnerabilityAlerts": true,
+  "packageRules": [
+    {
+      "addLabels": [
+        "pre-commit"
+      ],
+      "description": "Pre-commit hooks - high priority",
+      "groupName": "pre-commit hooks",
+      "matchManagers": [
+        "pre-commit"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch"
+      ],
+      "prPriority": 10
+    },
+    {
+      "addLabels": [
+        "github-actions"
+      ],
+      "description": "GitHub Actions - high priority",
+      "groupName": "GitHub Actions",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "pinDigests": true,
+      "prPriority": 9
+    },
+    {
+      "addLabels": [
+        "docker"
+      ],
+      "description": "Docker images and containers",
+      "groupName": "Docker dependencies",
+      "matchManagers": [
+        "dockerfile",
+        "docker-compose"
+      ],
+      "prPriority": 8
+    },
+    {
+      "addLabels": [
+        "helm"
+      ],
+      "description": "Helm dependencies",
+      "groupName": "Helm dependencies",
+      "matchManagers": [
+        "helm-values",
+        "helmv3"
+      ],
+      "prPriority": 7
+    },
+    {
+      "addLabels": [
+        "major-update",
+        "breaking-change"
+      ],
+      "description": "Major updates - low priority, automerge to develop",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "minimumReleaseAge": "7 days",
+      "prPriority": 1,
+      "reviewersFromCodeOwners": true
+    },
+    {
+      "addLabels": [
+        "minor-update"
+      ],
+      "description": "Minor updates - medium priority",
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "minimumReleaseAge": "3 days",
+      "prPriority": 5
+    },
+    {
+      "addLabels": [
+        "patch-update"
+      ],
+      "description": "Patch updates - high priority",
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "minimumReleaseAge": "1 day",
+      "prPriority": 8
+    },
+    {
+      "addLabels": [
+        "security"
+      ],
+      "description": "Security updates - highest priority",
+      "matchDatasources": [
+        "npm",
+        "pypi",
+        "docker",
+        "github-releases"
+      ],
+      "minimumReleaseAge": "0 days",
+      "prPriority": 15,
+      "vulnerabilityAlerts": {
+        "enabled": true
+      }
+    },
+    {
+      "addLabels": [
+        "pin-digest"
+      ],
+      "description": "Pin digest updates",
+      "matchUpdateTypes": [
+        "pinDigest"
+      ],
+      "prPriority": 6,
+      "schedule": [
+        "every weekend"
+      ]
+    }
+  ],
+  "platformAutomerge": true,
+  "prBodyTemplate": "This PR updates dependencies in the repository.\n\n{{#if hasReleaseNotes}}\n## Release Notes\n{{{releaseNotes}}}\n{{/if}}\n\n{{#if hasErrors}}\n## Errors\n{{{errors}}}\n{{/if}}\n\n---\n\n\ud83e\udd16 This PR was generated automatically by Renovate Bot.",
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 3,
+  "pre-commit": {
+    "enabled": true
+  },
+  "reviewers": [
+    "jorisdejosselin"
+  ],
+  "schedule": [
+    "after 2am and before 6am every weekday"
+  ],
+  "semanticCommitScope": "deps",
+  "semanticCommitType": "chore",
+  "semanticCommits": "enabled",
+  "timezone": "Europe/Amsterdam"
+}

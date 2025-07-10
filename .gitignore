@@ -1,0 +1,113 @@
+# Claude Code directory
+.claude/
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Package lock files
+yarn.lock  # Not using yarn
+# package-lock.json - KEEP this file for reproducible builds
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+.temp/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.AppleDouble
+.LSOverride
+Icon?
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Test artifacts
+test-results/
+test-output/
+
+# Build artifacts
+dist/
+build/
+
+# Semantic release generated files
+CHANGELOG.md
+.semantic-release-cache/
+
+# Pre-commit cache
+.pre-commit-cache/
+
+# Helm test charts (if created during testing)
+test-chart/
+example-chart/
+test-helm-repo/
+
+# Helm artifacts
+Chart.lock
+charts/
+*.tgz
