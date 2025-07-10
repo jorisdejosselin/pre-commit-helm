@@ -64,14 +64,28 @@ jobs:
           echo "=== Testing helm-lint hook ==="
           cd test-helm-repo
 
-          # Test main chart (should pass)
+          # Test main chart (should pass when run in isolation)
           echo "Testing main chart..."
-          if ../pre-commit-helm/hooks/helm-lint.sh; then
+
+          # Create isolated test directory with only main chart
+          mkdir -p /tmp/main-chart-test
+          cp Chart.yaml values.yaml /tmp/main-chart-test/
+          cp -r templates/ /tmp/main-chart-test/
+          if [ -d "tests/" ]; then
+            cp -r tests/ /tmp/main-chart-test/
+          fi
+
+          cd /tmp/main-chart-test
+          if ../../../pre-commit-helm/hooks/helm-lint.sh; then
             echo "✅ Main chart lint passed as expected"
           else
             echo "❌ Main chart lint failed unexpectedly"
             exit 1
           fi
+
+          # Clean up and return to test-helm-repo
+          cd /github/workspace/test-helm-repo
+          rm -rf /tmp/main-chart-test
 
           # Test lint-failures chart (should fail with specific errors)
           if [ -d "test-charts/lint-failures" ]; then
@@ -115,14 +129,28 @@ jobs:
           echo "=== Testing helm-template hook ==="
           cd test-helm-repo
 
-          # Test main chart (should pass)
+          # Test main chart (should pass when run in isolation)
           echo "Testing main chart template..."
-          if ../pre-commit-helm/hooks/helm-template.sh; then
+
+          # Create isolated test directory with only main chart
+          mkdir -p /tmp/main-chart-test
+          cp Chart.yaml values.yaml /tmp/main-chart-test/
+          cp -r templates/ /tmp/main-chart-test/
+          if [ -d "tests/" ]; then
+            cp -r tests/ /tmp/main-chart-test/
+          fi
+
+          cd /tmp/main-chart-test
+          if ../../../pre-commit-helm/hooks/helm-template.sh; then
             echo "✅ Main chart template passed as expected"
           else
             echo "❌ Main chart template failed unexpectedly"
             exit 1
           fi
+
+          # Clean up and return to test-helm-repo
+          cd /github/workspace/test-helm-repo
+          rm -rf /tmp/main-chart-test
 
           # Test template-errors chart (should fail with specific errors)
           if [ -d "test-charts/template-errors" ]; then
@@ -173,14 +201,28 @@ jobs:
           echo "=== Testing helm-unittest hook ==="
           cd test-helm-repo
 
-          # Test main chart (should pass)
+          # Test main chart (should pass when run in isolation)
           echo "Testing main chart unit tests..."
-          if ../pre-commit-helm/hooks/helm-unittest.sh; then
+
+          # Create isolated test directory with only main chart
+          mkdir -p /tmp/main-chart-test
+          cp Chart.yaml values.yaml /tmp/main-chart-test/
+          cp -r templates/ /tmp/main-chart-test/
+          if [ -d "tests/" ]; then
+            cp -r tests/ /tmp/main-chart-test/
+          fi
+
+          cd /tmp/main-chart-test
+          if ../../../pre-commit-helm/hooks/helm-unittest.sh; then
             echo "✅ Main chart unit tests passed as expected"
           else
             echo "❌ Main chart unit tests failed unexpectedly"
             exit 1
           fi
+
+          # Clean up and return to test-helm-repo
+          cd /github/workspace/test-helm-repo
+          rm -rf /tmp/main-chart-test
 
           # Test unittest-failures chart (should fail with specific errors)
           if [ -d "test-charts/unittest-failures" ]; then
@@ -238,14 +280,31 @@ jobs:
           echo "=== Testing helm-docs hook ==="
           cd test-helm-repo
 
-          # Test main chart (should pass)
+          # Test main chart (should pass when run in isolation)
           echo "Testing main chart docs..."
-          if ../pre-commit-helm/hooks/helm-docs.sh; then
+
+          # Create isolated test directory with only main chart
+          mkdir -p /tmp/main-chart-test
+          cp Chart.yaml values.yaml /tmp/main-chart-test/
+          cp -r templates/ /tmp/main-chart-test/
+          if [ -d "tests/" ]; then
+            cp -r tests/ /tmp/main-chart-test/
+          fi
+          if [ -f "README.md" ]; then
+            cp README.md /tmp/main-chart-test/
+          fi
+
+          cd /tmp/main-chart-test
+          if ../../../pre-commit-helm/hooks/helm-docs.sh; then
             echo "✅ Main chart docs passed as expected"
           else
             echo "❌ Main chart docs failed unexpectedly"
             exit 1
           fi
+
+          # Clean up and return to test-helm-repo
+          cd /github/workspace/test-helm-repo
+          rm -rf /tmp/main-chart-test
 
           # Test all problematic charts (may pass or fail depending on chart structure)
           if [ -d "test-charts" ]; then
@@ -278,14 +337,28 @@ jobs:
           echo "=== Testing helm-security hook ==="
           cd test-helm-repo
 
-          # Test main chart (should pass)
+          # Test main chart (should pass when run in isolation)
           echo "Testing main chart security..."
-          if ../pre-commit-helm/hooks/helm-security.sh; then
+
+          # Create isolated test directory with only main chart
+          mkdir -p /tmp/main-chart-test
+          cp Chart.yaml values.yaml /tmp/main-chart-test/
+          cp -r templates/ /tmp/main-chart-test/
+          if [ -d "tests/" ]; then
+            cp -r tests/ /tmp/main-chart-test/
+          fi
+
+          cd /tmp/main-chart-test
+          if ../../../pre-commit-helm/hooks/helm-security.sh; then
             echo "✅ Main chart security passed as expected"
           else
             echo "❌ Main chart security failed unexpectedly"
             exit 1
           fi
+
+          # Clean up and return to test-helm-repo
+          cd /github/workspace/test-helm-repo
+          rm -rf /tmp/main-chart-test
 
           # Test security-issues chart (should fail with specific errors)
           if [ -d "test-charts/security-issues" ]; then
@@ -390,14 +463,28 @@ jobs:
           echo "=== Testing helm-kubeval hook ==="
           cd test-helm-repo
 
-          # Test main chart (should pass)
+          # Test main chart (should pass when run in isolation)
           echo "Testing main chart kubeval..."
-          if ../pre-commit-helm/hooks/helm-kubeval.sh; then
+
+          # Create isolated test directory with only main chart
+          mkdir -p /tmp/main-chart-test
+          cp Chart.yaml values.yaml /tmp/main-chart-test/
+          cp -r templates/ /tmp/main-chart-test/
+          if [ -d "tests/" ]; then
+            cp -r tests/ /tmp/main-chart-test/
+          fi
+
+          cd /tmp/main-chart-test
+          if ../../../pre-commit-helm/hooks/helm-kubeval.sh; then
             echo "✅ Main chart kubeval passed as expected"
           else
             echo "❌ Main chart kubeval failed unexpectedly"
             exit 1
           fi
+
+          # Clean up and return to test-helm-repo
+          cd /github/workspace/test-helm-repo
+          rm -rf /tmp/main-chart-test
 
           # Test template-errors chart (should fail)
           if [ -d "test-charts/template-errors" ]; then
@@ -441,14 +528,28 @@ jobs:
           echo "=== Testing helm-dependency-update hook ==="
           cd test-helm-repo
 
-          # Test main chart (should pass)
+          # Test main chart (should pass when run in isolation)
           echo "Testing main chart dependency update..."
-          if ../pre-commit-helm/hooks/helm-dependency-update.sh; then
+
+          # Create isolated test directory with only main chart
+          mkdir -p /tmp/main-chart-test
+          cp Chart.yaml values.yaml /tmp/main-chart-test/
+          cp -r templates/ /tmp/main-chart-test/
+          if [ -d "tests/" ]; then
+            cp -r tests/ /tmp/main-chart-test/
+          fi
+
+          cd /tmp/main-chart-test
+          if ../../../pre-commit-helm/hooks/helm-dependency-update.sh; then
             echo "✅ Main chart dependency update passed as expected"
           else
             echo "❌ Main chart dependency update failed unexpectedly"
             exit 1
           fi
+
+          # Clean up and return to test-helm-repo
+          cd /github/workspace/test-helm-repo
+          rm -rf /tmp/main-chart-test
 
           # Test all problematic charts (may pass or fail depending on dependencies)
           if [ -d "test-charts" ]; then
