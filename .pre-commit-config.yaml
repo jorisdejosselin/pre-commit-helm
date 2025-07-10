@@ -1,4 +1,4 @@
-# Pre-commit configuration for the pre-commit-helm repository itself
+# Pre-commit configuration for the pre-commit-helm repository itselff
 repos:
   # Standard pre-commit hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
