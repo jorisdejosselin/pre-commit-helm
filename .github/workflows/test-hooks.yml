@@ -10,11 +10,11 @@ jobs:
   test-hooks-against-test-repo:
     runs-on: ubuntu-latest
     container:
-      image: python:3.11-alpine
+      image: python:3.13-alpine@sha256:9b4929a72599b6c6389ece4ecbf415fd1355129f22bb92bb137eea098f05e975
       options: --user root
     steps:
       - name: Checkout pre-commit-helm
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           path: pre-commit-helm
 

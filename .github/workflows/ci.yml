@@ -10,13 +10,13 @@ jobs:
   helm-lint:
     runs-on: ubuntu-latest
     container:
-      image: alpine/helm:3.14.0
+      image: alpine/helm:3.18.3@sha256:e1d0398b27ef1bfab2709f2df998824a6592705655eabaca96125c287942f6ad
       options: --user root
     strategy:
       matrix:
         helm-version: ["3.12.0", "3.13.0", "3.14.0"]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Setup tools
         run: |
@@ -114,10 +114,10 @@ jobs:
   helm-unittest:
     runs-on: ubuntu-latest
     container:
-      image: alpine/helm:3.14.0
+      image: alpine/helm:3.18.3@sha256:e1d0398b27ef1bfab2709f2df998824a6592705655eabaca96125c287942f6ad
       options: --user root
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Setup tools
         run: |
@@ -207,10 +207,10 @@ jobs:
   helm-docs:
     runs-on: ubuntu-latest
     container:
-      image: golang:1.22-alpine
+      image: golang:1.24-alpine@sha256:ddf52008bce1be455fe2b22d780b6693259aaf97b16383b6372f4b22dd33ad66
       options: --user root
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Setup tools
         run: |
@@ -245,10 +245,10 @@ jobs:
   trivy-security:
     runs-on: ubuntu-latest
     container:
-      image: aquasec/trivy:latest
+      image: aquasec/trivy:latest@sha256:a8ca29078522f30393bdb34225e4c0994d38f37083be81a42da3a2a7e1488e9e
       options: --user root --entrypoint=""
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Setup tools
         run: |
@@ -340,10 +340,10 @@ jobs:
   kubeval:
     runs-on: ubuntu-latest
     container:
-      image: alpine:latest
+      image: alpine:latest@sha256:8a1f59ffb675680d47db6337b49d22281a139e9d709335b492be023728e11715
       options: --user root
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Setup tools
         run: |
@@ -711,12 +711,12 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "18"
           cache: "npm"
