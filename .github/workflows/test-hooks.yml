@@ -93,8 +93,10 @@ jobs:
             cd test-charts/lint-failures
 
             # Capture output and exit code
+            set +e  # Temporarily disable exit on error
             OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-lint.sh 2>&1)
             EXIT_CODE=$?
+            set -e  # Re-enable exit on error
 
             if [ $EXIT_CODE -eq 0 ]; then
               echo "❌ Lint failures chart passed but should have failed"
@@ -158,8 +160,10 @@ jobs:
             cd test-charts/template-errors
 
             # Capture output and exit code
+            set +e  # Temporarily disable exit on error
             OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-template.sh 2>&1)
             EXIT_CODE=$?
+            set -e  # Re-enable exit on error
 
             if [ $EXIT_CODE -eq 0 ]; then
               echo "❌ Template errors chart passed but should have failed"
@@ -230,8 +234,10 @@ jobs:
             cd test-charts/unittest-failures
 
             # Capture output and exit code
+            set +e  # Temporarily disable exit on error
             OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-unittest.sh 2>&1)
             EXIT_CODE=$?
+            set -e  # Re-enable exit on error
 
             if [ $EXIT_CODE -eq 0 ]; then
               echo "❌ Unit test failures chart passed but should have failed"
@@ -315,8 +321,10 @@ jobs:
                 cd "$chart"
 
                 # Capture output and exit code
+                set +e  # Temporarily disable exit on error
                 OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-docs.sh 2>&1)
                 EXIT_CODE=$?
+                set -e  # Re-enable exit on error
 
                 if [ $EXIT_CODE -eq 0 ]; then
                   echo "✅ Docs generation passed for $chart"
@@ -366,8 +374,10 @@ jobs:
             cd test-charts/security-issues
 
             # Capture output and exit code
+            set +e  # Temporarily disable exit on error
             OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-security.sh 2>&1)
             EXIT_CODE=$?
+            set -e  # Re-enable exit on error
 
             if [ $EXIT_CODE -eq 0 ]; then
               echo "❌ Security issues chart passed but should have failed"
@@ -421,8 +431,10 @@ jobs:
             echo "Testing bad security yaml..."
 
             # Capture output and exit code
+            set +e  # Temporarily disable exit on error
             OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-security.sh test-bad-security.yaml 2>&1)
             EXIT_CODE=$?
+            set -e  # Re-enable exit on error
 
             if [ $EXIT_CODE -eq 0 ]; then
               echo "❌ Bad security yaml passed but should have failed"
@@ -492,8 +504,10 @@ jobs:
             cd test-charts/template-errors
 
             # Capture output and exit code
+            set +e  # Temporarily disable exit on error
             OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-kubeval.sh 2>&1)
             EXIT_CODE=$?
+            set -e  # Re-enable exit on error
 
             if [ $EXIT_CODE -eq 0 ]; then
               echo "❌ Template errors chart passed but should have failed"
@@ -560,8 +574,10 @@ jobs:
                 cd "$chart"
 
                 # Capture output and exit code
+                set +e  # Temporarily disable exit on error
                 OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-dependency-update.sh 2>&1)
                 EXIT_CODE=$?
+                set -e  # Re-enable exit on error
 
                 if [ $EXIT_CODE -eq 0 ]; then
                   echo "✅ Dependency update passed for $chart"
@@ -655,8 +671,10 @@ jobs:
           echo "Running pre-commit on all files..."
 
           # Capture output and exit code
+          set +e  # Temporarily disable exit on error
           OUTPUT=$(pre-commit run --all-files 2>&1)
           EXIT_CODE=$?
+          set -e  # Re-enable exit on error
 
           if [ $EXIT_CODE -eq 0 ]; then
             echo "❌ Pre-commit run passed but should have failed due to intentional failures"
