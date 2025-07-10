@@ -76,7 +76,7 @@ jobs:
           fi
 
           cd /tmp/main-chart-test
-          if /github/workspace/pre-commit-helm/hooks/helm-lint.sh; then
+          if $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-lint.sh; then
             echo "✅ Main chart lint passed as expected"
           else
             echo "❌ Main chart lint failed unexpectedly"
@@ -84,7 +84,7 @@ jobs:
           fi
 
           # Clean up and return to test-helm-repo
-          cd /github/workspace/test-helm-repo
+          cd $GITHUB_WORKSPACE/test-helm-repo
           rm -rf /tmp/main-chart-test
 
           # Test lint-failures chart (should fail with specific errors)
@@ -93,7 +93,7 @@ jobs:
             cd test-charts/lint-failures
 
             # Capture output and exit code
-            OUTPUT=$(/github/workspace/pre-commit-helm/hooks/helm-lint.sh 2>&1)
+            OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-lint.sh 2>&1)
             EXIT_CODE=$?
 
             if [ $EXIT_CODE -eq 0 ]; then
@@ -141,7 +141,7 @@ jobs:
           fi
 
           cd /tmp/main-chart-test
-          if /github/workspace/pre-commit-helm/hooks/helm-template.sh; then
+          if $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-template.sh; then
             echo "✅ Main chart template passed as expected"
           else
             echo "❌ Main chart template failed unexpectedly"
@@ -149,7 +149,7 @@ jobs:
           fi
 
           # Clean up and return to test-helm-repo
-          cd /github/workspace/test-helm-repo
+          cd $GITHUB_WORKSPACE/test-helm-repo
           rm -rf /tmp/main-chart-test
 
           # Test template-errors chart (should fail with specific errors)
@@ -158,7 +158,7 @@ jobs:
             cd test-charts/template-errors
 
             # Capture output and exit code
-            OUTPUT=$(/github/workspace/pre-commit-helm/hooks/helm-template.sh 2>&1)
+            OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-template.sh 2>&1)
             EXIT_CODE=$?
 
             if [ $EXIT_CODE -eq 0 ]; then
@@ -213,7 +213,7 @@ jobs:
           fi
 
           cd /tmp/main-chart-test
-          if /github/workspace/pre-commit-helm/hooks/helm-unittest.sh; then
+          if $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-unittest.sh; then
             echo "✅ Main chart unit tests passed as expected"
           else
             echo "❌ Main chart unit tests failed unexpectedly"
@@ -221,7 +221,7 @@ jobs:
           fi
 
           # Clean up and return to test-helm-repo
-          cd /github/workspace/test-helm-repo
+          cd $GITHUB_WORKSPACE/test-helm-repo
           rm -rf /tmp/main-chart-test
 
           # Test unittest-failures chart (should fail with specific errors)
@@ -230,7 +230,7 @@ jobs:
             cd test-charts/unittest-failures
 
             # Capture output and exit code
-            OUTPUT=$(/github/workspace/pre-commit-helm/hooks/helm-unittest.sh 2>&1)
+            OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-unittest.sh 2>&1)
             EXIT_CODE=$?
 
             if [ $EXIT_CODE -eq 0 ]; then
@@ -295,7 +295,7 @@ jobs:
           fi
 
           cd /tmp/main-chart-test
-          if /github/workspace/pre-commit-helm/hooks/helm-docs.sh; then
+          if $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-docs.sh; then
             echo "✅ Main chart docs passed as expected"
           else
             echo "❌ Main chart docs failed unexpectedly"
@@ -303,7 +303,7 @@ jobs:
           fi
 
           # Clean up and return to test-helm-repo
-          cd /github/workspace/test-helm-repo
+          cd $GITHUB_WORKSPACE/test-helm-repo
           rm -rf /tmp/main-chart-test
 
           # Test all problematic charts (may pass or fail depending on chart structure)
@@ -315,7 +315,7 @@ jobs:
                 cd "$chart"
 
                 # Capture output and exit code
-                OUTPUT=$(/github/workspace/pre-commit-helm/hooks/helm-docs.sh 2>&1)
+                OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-docs.sh 2>&1)
                 EXIT_CODE=$?
 
                 if [ $EXIT_CODE -eq 0 ]; then
@@ -349,7 +349,7 @@ jobs:
           fi
 
           cd /tmp/main-chart-test
-          if /github/workspace/pre-commit-helm/hooks/helm-security.sh; then
+          if $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-security.sh; then
             echo "✅ Main chart security passed as expected"
           else
             echo "❌ Main chart security failed unexpectedly"
@@ -357,7 +357,7 @@ jobs:
           fi
 
           # Clean up and return to test-helm-repo
-          cd /github/workspace/test-helm-repo
+          cd $GITHUB_WORKSPACE/test-helm-repo
           rm -rf /tmp/main-chart-test
 
           # Test security-issues chart (should fail with specific errors)
@@ -366,7 +366,7 @@ jobs:
             cd test-charts/security-issues
 
             # Capture output and exit code
-            OUTPUT=$(/github/workspace/pre-commit-helm/hooks/helm-security.sh 2>&1)
+            OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-security.sh 2>&1)
             EXIT_CODE=$?
 
             if [ $EXIT_CODE -eq 0 ]; then
@@ -421,7 +421,7 @@ jobs:
             echo "Testing bad security yaml..."
 
             # Capture output and exit code
-            OUTPUT=$(/github/workspace/pre-commit-helm/hooks/helm-security.sh test-bad-security.yaml 2>&1)
+            OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-security.sh test-bad-security.yaml 2>&1)
             EXIT_CODE=$?
 
             if [ $EXIT_CODE -eq 0 ]; then
@@ -475,7 +475,7 @@ jobs:
           fi
 
           cd /tmp/main-chart-test
-          if /github/workspace/pre-commit-helm/hooks/helm-kubeval.sh; then
+          if $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-kubeval.sh; then
             echo "✅ Main chart kubeval passed as expected"
           else
             echo "❌ Main chart kubeval failed unexpectedly"
@@ -483,7 +483,7 @@ jobs:
           fi
 
           # Clean up and return to test-helm-repo
-          cd /github/workspace/test-helm-repo
+          cd $GITHUB_WORKSPACE/test-helm-repo
           rm -rf /tmp/main-chart-test
 
           # Test template-errors chart (should fail)
@@ -492,7 +492,7 @@ jobs:
             cd test-charts/template-errors
 
             # Capture output and exit code
-            OUTPUT=$(/github/workspace/pre-commit-helm/hooks/helm-kubeval.sh 2>&1)
+            OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-kubeval.sh 2>&1)
             EXIT_CODE=$?
 
             if [ $EXIT_CODE -eq 0 ]; then
@@ -540,7 +540,7 @@ jobs:
           fi
 
           cd /tmp/main-chart-test
-          if /github/workspace/pre-commit-helm/hooks/helm-dependency-update.sh; then
+          if $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-dependency-update.sh; then
             echo "✅ Main chart dependency update passed as expected"
           else
             echo "❌ Main chart dependency update failed unexpectedly"
@@ -548,7 +548,7 @@ jobs:
           fi
 
           # Clean up and return to test-helm-repo
-          cd /github/workspace/test-helm-repo
+          cd $GITHUB_WORKSPACE/test-helm-repo
           rm -rf /tmp/main-chart-test
 
           # Test all problematic charts (may pass or fail depending on dependencies)
@@ -560,7 +560,7 @@ jobs:
                 cd "$chart"
 
                 # Capture output and exit code
-                OUTPUT=$(/github/workspace/pre-commit-helm/hooks/helm-dependency-update.sh 2>&1)
+                OUTPUT=$($GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-dependency-update.sh 2>&1)
                 EXIT_CODE=$?
 
                 if [ $EXIT_CODE -eq 0 ]; then
@@ -598,49 +598,49 @@ jobs:
               hooks:
                 - id: helm-lint
                   name: Helm Lint
-                  entry: /github/workspace/pre-commit-helm/hooks/helm-lint.sh
+                  entry: $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-lint.sh
                   language: script
                   files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)$'
                   pass_filenames: false
                   always_run: false
                 - id: helm-template
                   name: Helm Template
-                  entry: /github/workspace/pre-commit-helm/hooks/helm-template.sh
+                  entry: $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-template.sh
                   language: script
                   files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)$'
                   pass_filenames: false
                   always_run: false
                 - id: helm-unittest
                   name: Helm Unit Test
-                  entry: /github/workspace/pre-commit-helm/hooks/helm-unittest.sh
+                  entry: $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-unittest.sh
                   language: script
                   files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl|tests/.*\.yaml)$'
                   pass_filenames: false
                   always_run: false
                 - id: helm-docs
                   name: Helm Docs
-                  entry: /github/workspace/pre-commit-helm/hooks/helm-docs.sh
+                  entry: $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-docs.sh
                   language: script
                   files: '(Chart\.yaml|values\.yaml|README\.md)$'
                   pass_filenames: false
                   always_run: false
                 - id: helm-kubeval
                   name: Helm Kubeval
-                  entry: /github/workspace/pre-commit-helm/hooks/helm-kubeval.sh
+                  entry: $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-kubeval.sh
                   language: script
                   files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)$'
                   pass_filenames: false
                   always_run: false
                 - id: helm-security
                   name: Helm Security
-                  entry: /github/workspace/pre-commit-helm/hooks/helm-security.sh
+                  entry: $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-security.sh
                   language: script
                   files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)$'
                   pass_filenames: false
                   always_run: false
                 - id: helm-dependency-update
                   name: Helm Dependency Update
-                  entry: /github/workspace/pre-commit-helm/hooks/helm-dependency-update.sh
+                  entry: $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-dependency-update.sh
                   language: script
                   files: '(Chart\.yaml|Chart\.lock)$'
                   pass_filenames: false
