@@ -67,6 +67,7 @@ jobs:
       - name: Test helm-lint hook
         run: |
           echo "=== Testing helm-lint hook ==="
+          export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/go/bin"
           cd test-helm-repo
 
           # Test main chart (should pass when run in isolation)
@@ -134,6 +135,7 @@ jobs:
       - name: Test helm-template hook
         run: |
           echo "=== Testing helm-template hook ==="
+          export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/go/bin"
           cd test-helm-repo
 
           # Test main chart (should pass when run in isolation)
@@ -208,6 +210,7 @@ jobs:
       - name: Test helm-unittest hook
         run: |
           echo "=== Testing helm-unittest hook ==="
+          export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/go/bin"
           cd test-helm-repo
 
           # Test main chart (should pass when run in isolation)
@@ -289,7 +292,12 @@ jobs:
       - name: Test helm-docs hook
         run: |
           echo "=== Testing helm-docs hook ==="
+          export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/go/bin"
           cd test-helm-repo
+
+          # Debug PATH and tool availability
+          echo "Current PATH: $PATH"
+          which helm-docs && echo "helm-docs found at: $(which helm-docs)" || echo "helm-docs not found in PATH"
 
           # Test main chart (should pass when run in isolation)
           echo "Testing main chart docs..."
@@ -348,6 +356,7 @@ jobs:
       - name: Test helm-security hook
         run: |
           echo "=== Testing helm-security hook ==="
+          export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/go/bin"
           cd test-helm-repo
 
           # Test main chart (should pass when run in isolation)
@@ -486,6 +495,7 @@ jobs:
       - name: Test helm-kubeval hook
         run: |
           echo "=== Testing helm-kubeval hook ==="
+          export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/go/bin"
           cd test-helm-repo
 
           # Test main chart (should pass when run in isolation)
@@ -553,6 +563,7 @@ jobs:
       - name: Test helm-dependency-update hook
         run: |
           echo "=== Testing helm-dependency-update hook ==="
+          export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/go/bin"
           cd test-helm-repo
 
           # Test main chart (should pass when run in isolation)
@@ -614,6 +625,7 @@ jobs:
       - name: Test pre-commit integration
         run: |
           echo "=== Testing pre-commit integration ==="
+          export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/go/bin"
           cd test-helm-repo
 
           # Initialize git config
