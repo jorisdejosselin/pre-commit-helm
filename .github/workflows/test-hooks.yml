@@ -48,10 +48,16 @@ jobs:
 
           # Install helm-docs
           export PATH=$PATH:/root/go/bin
+          echo "Installing helm-docs..."
           go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
+          echo "Creating symlink..."
           ln -s /root/go/bin/helm-docs /usr/local/bin/helm-docs
-          # Verify helm-docs installation
-          which helm-docs && echo "helm-docs installed successfully" || echo "helm-docs installation failed"
+          # Verify helm-docs installation thoroughly
+          echo "Verifying helm-docs installation..."
+          ls -la /root/go/bin/helm-docs || echo "/root/go/bin/helm-docs not found"
+          ls -la /usr/local/bin/helm-docs || echo "/usr/local/bin/helm-docs not found"
+          which helm-docs && echo "helm-docs found in PATH at: $(which helm-docs)" || echo "helm-docs not found in PATH"
+          echo "Current PATH during setup: $PATH"
 
           # Install trivy
           wget -qO- https://github.com/aquasecurity/trivy/releases/download/v0.55.2/trivy_0.55.2_Linux-64bit.tar.gz | tar xz
