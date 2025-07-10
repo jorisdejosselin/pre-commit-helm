@@ -46,11 +46,17 @@ jobs:
           # Install helm-unittest
           helm plugin install https://github.com/helm-unittest/helm-unittest
 
-          # Install helm-docs with error checking
-          export PATH=$PATH:/root/go/bin
-          echo "Current Go version and GOPATH:"
+          # Install helm-docs with proper Go environment setup
+          echo "Setting up Go environment..."
+          export GOPATH=/root/go
+          export GOBIN=/root/go/bin
+          export PATH=$PATH:$GOBIN
+          mkdir -p $GOBIN
+
+          echo "Current Go environment:"
           go version
           echo "GOPATH: $GOPATH"
+          echo "GOBIN: $GOBIN"
           echo "GOROOT: $GOROOT"
 
           echo "Installing helm-docs..."
@@ -62,18 +68,20 @@ jobs:
           fi
 
           echo "Checking if binary was created..."
-          if [ -f "/root/go/bin/helm-docs" ]; then
-            echo "Binary found at /root/go/bin/helm-docs"
-            ls -la /root/go/bin/helm-docs
+          if [ -f "$GOBIN/helm-docs" ]; then
+            echo "Binary found at $GOBIN/helm-docs"
+            ls -la $GOBIN/helm-docs
           else
-            echo "Binary NOT found at /root/go/bin/helm-docs"
-            echo "Contents of /root/go/bin/:"
-            ls -la /root/go/bin/ || echo "/root/go/bin/ does not exist"
+            echo "Binary NOT found at $GOBIN/helm-docs"
+            echo "Contents of $GOBIN:"
+            ls -la $GOBIN/ || echo "$GOBIN does not exist"
+            echo "Checking default Go install location..."
+            find /root -name "helm-docs" 2>/dev/null || echo "helm-docs binary not found anywhere in /root"
             exit 1
           fi
 
           echo "Creating symlink..."
-          if ln -sf /root/go/bin/helm-docs /usr/local/bin/helm-docs; then
+          if ln -sf $GOBIN/helm-docs /usr/local/bin/helm-docs; then
             echo "Symlink created successfully"
             ls -la /usr/local/bin/helm-docs
           else
