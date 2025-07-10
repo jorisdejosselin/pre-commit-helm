@@ -3,6 +3,9 @@
   "assignees": [
     "jorisdejosselin"
   ],
+  "automerge": true,
+  "automergeStrategy": "merge",
+  "automergeType": "pr",
   "baseBranches": [
     "develop"
   ],
@@ -100,7 +103,7 @@
         "major-update",
         "breaking-change"
       ],
-      "description": "Major updates - low priority, require manual review",
+      "description": "Major updates - low priority, automerge to develop",
       "matchUpdateTypes": [
         "major"
       ],
@@ -159,6 +162,7 @@
       ]
     }
   ],
+  "platformAutomerge": true,
   "prBodyTemplate": "This PR updates dependencies in the repository.\n\n{{#if hasReleaseNotes}}\n## Release Notes\n{{{releaseNotes}}}\n{{/if}}\n\n{{#if hasErrors}}\n## Errors\n{{{errors}}}\n{{/if}}\n\n---\n\n\ud83e\udd16 This PR was generated automatically by Renovate Bot.",
   "prConcurrentLimit": 5,
   "prHourlyLimit": 3,
@@ -185,6 +189,7 @@
       ]
     }
   ],
+  "requiredStatusChecks": null,
   "reviewers": [
     "jorisdejosselin"
   ],
