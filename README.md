@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/jorisdejosselin/pre-commit-helm/actions/workflows/test-hooks.yml/badge.svg)](https://github.com/jorisdejosselin/pre-commit-helm/actions/workflows/test-hooks.yml)
 [![Release](https://github.com/jorisdejosselin/pre-commit-helm/actions/workflows/release.yml/badge.svg)](https://github.com/jorisdejosselin/pre-commit-helm/actions/workflows/release.yml)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/jorisdejosselin/pre-commit-helm?sort=semver&logo=github)](https://github.com/jorisdejosselin/pre-commit-helm/releases)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/jorisdejosselin/pre-commit-helm?logo=github)](https://github.com/jorisdejosselin/pre-commit-helm/releases)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
