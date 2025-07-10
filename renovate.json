@@ -39,7 +39,7 @@
   ],
   "dependencyDashboard": true,
   "dependencyDashboardAutoclose": true,
-  "dependencyDashboardTitle": "🔄 Dependency Updates Dashboard",
+  "dependencyDashboardTitle": "\ud83d\udd04 Dependency Updates Dashboard",
   "description": "Renovate configuration for jorisdejosselin/pre-commit-helm repository",
   "enabledManagers": [
     "pre-commit",
@@ -57,6 +57,7 @@
   "ignorePresets": [
     ":prHourlyLimit2"
   ],
+  "ignoreTests": true,
   "labels": [
     "dependencies"
   ],
@@ -187,13 +188,12 @@
     }
   ],
   "platformAutomerge": true,
-  "prBodyTemplate": "This PR updates dependencies in the repository.\n\n{{#if hasReleaseNotes}}\n## Release Notes\n{{{releaseNotes}}}\n{{/if}}\n\n{{#if hasErrors}}\n## Errors\n{{{errors}}}\n{{/if}}\n\n---\n\n🤖 This PR was generated automatically by Renovate Bot.",
+  "prBodyTemplate": "This PR updates dependencies in the repository.\n\n{{#if hasReleaseNotes}}\n## Release Notes\n{{{releaseNotes}}}\n{{/if}}\n\n{{#if hasErrors}}\n## Errors\n{{{errors}}}\n{{/if}}\n\n---\n\n\ud83e\udd16 This PR was generated automatically by Renovate Bot.",
   "prConcurrentLimit": 5,
   "prHourlyLimit": 3,
   "pre-commit": {
     "enabled": true
   },
-  "ignoreTests": true,
   "reviewers": [
     "jorisdejosselin"
   ],
