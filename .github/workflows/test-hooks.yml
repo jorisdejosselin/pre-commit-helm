@@ -46,16 +46,43 @@ jobs:
           # Install helm-unittest
           helm plugin install https://github.com/helm-unittest/helm-unittest
 
-          # Install helm-docs
+          # Install helm-docs with error checking
           export PATH=$PATH:/root/go/bin
+          echo "Current Go version and GOPATH:"
+          go version
+          echo "GOPATH: $GOPATH"
+          echo "GOROOT: $GOROOT"
+
           echo "Installing helm-docs..."
-          go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
+          if go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest; then
+            echo "helm-docs go install succeeded"
+          else
+            echo "helm-docs go install failed"
+            exit 1
+          fi
+
+          echo "Checking if binary was created..."
+          if [ -f "/root/go/bin/helm-docs" ]; then
+            echo "Binary found at /root/go/bin/helm-docs"
+            ls -la /root/go/bin/helm-docs
+          else
+            echo "Binary NOT found at /root/go/bin/helm-docs"
+            echo "Contents of /root/go/bin/:"
+            ls -la /root/go/bin/ || echo "/root/go/bin/ does not exist"
+            exit 1
+          fi
+
           echo "Creating symlink..."
-          ln -s /root/go/bin/helm-docs /usr/local/bin/helm-docs
-          # Verify helm-docs installation thoroughly
-          echo "Verifying helm-docs installation..."
-          ls -la /root/go/bin/helm-docs || echo "/root/go/bin/helm-docs not found"
-          ls -la /usr/local/bin/helm-docs || echo "/usr/local/bin/helm-docs not found"
+          if ln -sf /root/go/bin/helm-docs /usr/local/bin/helm-docs; then
+            echo "Symlink created successfully"
+            ls -la /usr/local/bin/helm-docs
+          else
+            echo "Symlink creation failed"
+            exit 1
+          fi
+
+          # Final verification
+          echo "Final verification:"
           which helm-docs && echo "helm-docs found in PATH at: $(which helm-docs)" || echo "helm-docs not found in PATH"
           echo "Current PATH during setup: $PATH"
 
