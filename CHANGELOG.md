@@ -1,3 +1,10 @@
+# [1.1.0-beta.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.1-beta.1...v1.1.0-beta.1) (2025-07-10)
+
+
+### Features
+
+* add more comprehensive testing of helm hooks ([69b9e84](https://github.com/jorisdejosselin/pre-commit-helm/commit/69b9e84bd683bd801476cf22e5c5802cc51bc0da))
+
 ## [1.0.1-beta.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.0...v1.0.1-beta.1) (2025-07-10)
 
 # 1.0.0 (2025-07-10)
