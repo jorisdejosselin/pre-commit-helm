@@ -12,6 +12,8 @@ jobs:
     container:
       image: python:3.13-alpine@sha256:9b4929a72599b6c6389ece4ecbf415fd1355129f22bb92bb137eea098f05e975
       options: --user root
+    env:
+      PATH: "/usr/local/bin:/usr/bin:/bin:/root/go/bin"
     steps:
       - name: Checkout pre-commit-helm
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -45,8 +47,11 @@ jobs:
           helm plugin install https://github.com/helm-unittest/helm-unittest
 
           # Install helm-docs
+          export PATH=$PATH:/root/go/bin
           go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
           ln -s /root/go/bin/helm-docs /usr/local/bin/helm-docs
+          # Verify helm-docs installation
+          which helm-docs && helm-docs --version || echo "helm-docs installation failed"
 
           # Install trivy
           wget -qO- https://github.com/aquasecurity/trivy/releases/download/v0.55.2/trivy_0.55.2_Linux-64bit.tar.gz | tar xz
