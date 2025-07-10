@@ -678,49 +678,49 @@ jobs:
           echo '    hooks:' >> .pre-commit-config.yaml
           echo '      - id: helm-lint' >> .pre-commit-config.yaml
           echo '        name: Helm Lint' >> .pre-commit-config.yaml
-          echo "        entry: \$GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-lint.sh" >> .pre-commit-config.yaml
+          echo "        entry: $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-lint.sh" >> .pre-commit-config.yaml
           echo '        language: script' >> .pre-commit-config.yaml
           echo "        files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)\$'" >> .pre-commit-config.yaml
           echo '        pass_filenames: false' >> .pre-commit-config.yaml
           echo '        always_run: false' >> .pre-commit-config.yaml
           echo '      - id: helm-template' >> .pre-commit-config.yaml
           echo '        name: Helm Template' >> .pre-commit-config.yaml
-          echo "        entry: \$GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-template.sh" >> .pre-commit-config.yaml
+          echo "        entry: $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-template.sh" >> .pre-commit-config.yaml
           echo '        language: script' >> .pre-commit-config.yaml
           echo "        files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)\$'" >> .pre-commit-config.yaml
           echo '        pass_filenames: false' >> .pre-commit-config.yaml
           echo '        always_run: false' >> .pre-commit-config.yaml
           echo '      - id: helm-unittest' >> .pre-commit-config.yaml
           echo '        name: Helm Unit Test' >> .pre-commit-config.yaml
-          echo "        entry: \$GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-unittest.sh" >> .pre-commit-config.yaml
+          echo "        entry: $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-unittest.sh" >> .pre-commit-config.yaml
           echo '        language: script' >> .pre-commit-config.yaml
           echo "        files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl|tests/.*\.yaml)\$'" >> .pre-commit-config.yaml
           echo '        pass_filenames: false' >> .pre-commit-config.yaml
           echo '        always_run: false' >> .pre-commit-config.yaml
           echo '      - id: helm-docs' >> .pre-commit-config.yaml
           echo '        name: Helm Docs' >> .pre-commit-config.yaml
-          echo "        entry: \$GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-docs.sh" >> .pre-commit-config.yaml
+          echo "        entry: $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-docs.sh" >> .pre-commit-config.yaml
           echo '        language: script' >> .pre-commit-config.yaml
           echo "        files: '(Chart\.yaml|values\.yaml|README\.md)\$'" >> .pre-commit-config.yaml
           echo '        pass_filenames: false' >> .pre-commit-config.yaml
           echo '        always_run: false' >> .pre-commit-config.yaml
           echo '      - id: helm-kubeval' >> .pre-commit-config.yaml
           echo '        name: Helm Kubeval' >> .pre-commit-config.yaml
-          echo "        entry: \$GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-kubeval.sh" >> .pre-commit-config.yaml
+          echo "        entry: $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-kubeval.sh" >> .pre-commit-config.yaml
           echo '        language: script' >> .pre-commit-config.yaml
           echo "        files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)\$'" >> .pre-commit-config.yaml
           echo '        pass_filenames: false' >> .pre-commit-config.yaml
           echo '        always_run: false' >> .pre-commit-config.yaml
           echo '      - id: helm-security' >> .pre-commit-config.yaml
           echo '        name: Helm Security' >> .pre-commit-config.yaml
-          echo "        entry: \$GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-security.sh" >> .pre-commit-config.yaml
+          echo "        entry: $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-security.sh" >> .pre-commit-config.yaml
           echo '        language: script' >> .pre-commit-config.yaml
           echo "        files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)\$'" >> .pre-commit-config.yaml
           echo '        pass_filenames: false' >> .pre-commit-config.yaml
           echo '        always_run: false' >> .pre-commit-config.yaml
           echo '      - id: helm-dependency-update' >> .pre-commit-config.yaml
           echo '        name: Helm Dependency Update' >> .pre-commit-config.yaml
-          echo "        entry: \$GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-dependency-update.sh" >> .pre-commit-config.yaml
+          echo "        entry: $GITHUB_WORKSPACE/pre-commit-helm/hooks/helm-dependency-update.sh" >> .pre-commit-config.yaml
           echo '        language: script' >> .pre-commit-config.yaml
           echo "        files: '(Chart\.yaml|Chart\.lock)\$'" >> .pre-commit-config.yaml
           echo '        pass_filenames: false' >> .pre-commit-config.yaml
