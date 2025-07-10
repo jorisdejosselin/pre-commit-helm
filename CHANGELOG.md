@@ -1,3 +1,10 @@
+# [1.1.0-beta.5](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.4...v1.1.0-beta.5) (2025-07-10)
+
+
+### Bug Fixes
+
+* new testing pipeline ([510d461](https://github.com/jorisdejosselin/pre-commit-helm/commit/510d461de1df9c2495e0e551600adc269dc132c0))
+
 # [1.1.0-beta.4](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.3...v1.1.0-beta.4) (2025-07-10)
 
 
