@@ -5,16 +5,16 @@ set -e
 # Script metadata (used for debugging if needed)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly SCRIPT_DIR
-readonly HOOK_ID="helm-kubeval"
+readonly HOOK_ID="helm-kubeconform"
 
 function main() {
   local -r hook_config="$*"
   local exit_code=0
 
-  # Check if kubeval is installed
-  if ! command -v kubeval &> /dev/null; then
-    echo "Error: kubeval is not installed or not in PATH"
-    echo "Install it from: https://github.com/instrumenta/kubeval"
+  # Check if kubeconform is installed
+  if ! command -v kubeconform &> /dev/null; then
+    echo "Error: kubeconform is not installed or not in PATH"
+    echo "Install it from: https://github.com/yannh/kubeconform"
     exit 1
   fi
 
@@ -57,9 +57,9 @@ function main() {
     esac
   done
 
-  # Run kubeval on each chart
+  # Run kubeconform on each chart
   for chart_dir in "${charts[@]}"; do
-    echo "Running kubeval on chart: $chart_dir"
+    echo "Running kubeconform on chart: $chart_dir"
 
     # Update dependencies if Chart.lock exists or dependencies are defined
     if [ -f "$chart_dir/Chart.lock" ] || grep -q "dependencies:" "$chart_dir/Chart.yaml" 2>/dev/null; then
@@ -69,49 +69,50 @@ function main() {
       fi
     fi
 
-    # Create temporary file for rendered templates
-    local temp_file
-    temp_file=$(mktemp)
+    # Create temporary directory for rendered templates
+    local temp_dir
+    temp_dir=$(mktemp -d)
 
-    # Render templates
-    if ! helm template test-release "$chart_dir" > "$temp_file" 2>/dev/null; then
+    # Render templates to directory
+    if ! helm template test-release "$chart_dir" --output-dir "$temp_dir" &>/dev/null; then
       echo "Failed to render templates for chart: $chart_dir"
-      rm -f "$temp_file"
+      rm -rf "$temp_dir"
       exit_code=1
       continue
     fi
 
-    # Run kubeval
-    local kubeval_cmd="kubeval"
+    # Run kubeconform
+    local kubeconform_cmd="kubeconform -summary -verbose"
 
     if [ -n "$kubernetes_version" ]; then
-      kubeval_cmd="$kubeval_cmd --kubernetes-version $kubernetes_version"
+      kubeconform_cmd="$kubeconform_cmd -kubernetes-version $kubernetes_version"
     fi
 
     # Add any additional arguments
     for arg in "${args[@]}"; do
-      kubeval_cmd="$kubeval_cmd $arg"
+      kubeconform_cmd="$kubeconform_cmd $arg"
     done
 
-    kubeval_cmd="$kubeval_cmd $temp_file"
+    # kubeconform can validate directories, so pass the temp directory
+    kubeconform_cmd="$kubeconform_cmd $temp_dir"
 
-    if ! eval "$kubeval_cmd"; then
-      echo "kubeval failed for chart: $chart_dir"
+    if ! eval "$kubeconform_cmd"; then
+      echo "kubeconform failed for chart: $chart_dir"
       exit_code=1
     else
-      echo "kubeval passed for chart: $chart_dir"
+      echo "kubeconform passed for chart: $chart_dir"
     fi
 
-    # Clean up temporary file
-    rm -f "$temp_file"
+    # Clean up temporary directory
+    rm -rf "$temp_dir"
   done
 
   if [ $exit_code -ne 0 ]; then
-    echo "kubeval failed for one or more charts"
+    echo "kubeconform failed for one or more charts"
     exit $exit_code
   fi
 
-  echo "kubeval passed for all charts"
+  echo "kubeconform passed for all charts"
 }
 
 main "$@"

@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  pre-commit-helm:
+    build: .
+    image: ghcr.io/jorisdejosselin/pre-commit-helm:latest
+    container_name: pre-commit-helm
+    volumes:
+      # Mount your chart directory here
+      - .:/workspace
+      # Persist Helm plugins and cache
+      - helm-data:/root/.local/share/helm
+      - helm-cache:/root/.cache/helm
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
+
+volumes:
+  helm-data:
+  helm-cache:
