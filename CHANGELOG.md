@@ -1,3 +1,14 @@
+## [1.0.2-beta.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.2-beta.1...v1.0.2-beta.2) (2025-07-11)
+
+
+### Bug Fixes
+
+* commit linting [ skip ci ] ([1742717](https://github.com/jorisdejosselin/pre-commit-helm/commit/174271773574440395193a3a74bdc8dc94e6840e))
+* helm unit binary detection ([97e788c](https://github.com/jorisdejosselin/pre-commit-helm/commit/97e788c39d8f252b8a64c6d0895c863bd47a9bd4))
+* pushing image [ skip ci ] ([e0e74d9](https://github.com/jorisdejosselin/pre-commit-helm/commit/e0e74d900800af6537913a913eb226599ce07d7b))
+* pushing image [ skip ci ] ([1564c25](https://github.com/jorisdejosselin/pre-commit-helm/commit/1564c25714e11c473192084835bb9b0d4dd772e7))
+* pushing image [ skip ci ] ([28939af](https://github.com/jorisdejosselin/pre-commit-helm/commit/28939af55961faf1dda1ad6f1b860c1241dab8c4))
+
 ## [1.0.2-beta.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.1...v1.0.2-beta.1) (2025-07-11)
 
 ## [1.0.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.0...v1.0.1) (2025-07-10)
