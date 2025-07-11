@@ -117,10 +117,12 @@ We use the [Angular Commit Message Conventions](https://github.com/angular/angul
 
 ### Breaking Changes
 
-To trigger a major version bump, include `BREAKING CHANGE:` in the commit body or add `!` after the type:
+To trigger a major version bump, include `BREAKING CHANGE:` in the commit body:
 
 ```bash
-feat!: remove support for helm v2
+feat: remove support for helm v2
+
+BREAKING CHANGE: helm v2 is no longer supported
 ```
 
 or

@@ -1,3 +1,12 @@
+## [1.0.3-beta.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.3-beta.1...v1.0.3-beta.2) (2025-07-11)
+
+
+### Bug Fixes
+
+* dangerous workflow design ([718a223](https://github.com/jorisdejosselin/pre-commit-helm/commit/718a2237cd776936f97d95d28dfe0c8f38539eda))
+
+## [1.0.3-beta.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.2...v1.0.3-beta.1) (2025-07-11)
+
 ## [1.0.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.1...v1.0.2) (2025-07-11)
 
 ## [1.0.2-beta.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.2-beta.1...v1.0.2-beta.2) (2025-07-11)

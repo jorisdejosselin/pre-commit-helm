@@ -53,10 +53,12 @@ This will guide you through creating a properly formatted commit message.
 
 ### Breaking Changes
 
-For breaking changes, use `!` after the type or include `BREAKING CHANGE:` in the body:
+For breaking changes, include `BREAKING CHANGE:` in the body:
 
 ```bash
-feat!: remove deprecated hook
+feat: remove deprecated hook
+
+BREAKING CHANGE: this hook is no longer available
 ```
 
 or
@@ -256,7 +258,7 @@ Releases are automated using semantic-release:
 3. **Version bumps**:
    - **patch**: fix, docs, style, refactor, perf, test, build, ci, chore, revert
    - **minor**: feat
-   - **major**: any commit with `BREAKING CHANGE:` or `!` after type
+   - **major**: any commit with `BREAKING CHANGE:` in the body
 
 ## Questions or Issues?
 
