@@ -53,11 +53,11 @@ jobs:
           mv trivy /usr/local/bin/trivy
           chmod +x /usr/local/bin/trivy
 
-          # Install kubeval
-          wget https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz
-          tar xf kubeval-linux-amd64.tar.gz
-          mv kubeval /usr/local/bin/kubeval
-          chmod +x /usr/local/bin/kubeval
+          # Install kubeconform
+          wget https://github.com/yannh/kubeconform/releases/download/v0.6.7/kubeconform-linux-amd64.tar.gz
+          tar xf kubeconform-linux-amd64.tar.gz
+          mv kubeconform /usr/local/bin/kubeconform
+          chmod +x /usr/local/bin/kubeconform
 
       - name: Test helm-lint hook
         run: |
@@ -165,24 +165,24 @@ jobs:
 
           echo "helm-security tests completed"
 
-      - name: Test helm-kubeval hook
+      - name: Test helm-kubeconform hook
         run: |
-          echo "=== Testing helm-kubeval hook ==="
+          echo "=== Testing helm-kubeconform hook ==="
           cd test-helm-repo
 
           # Test main chart (should pass)
-          echo "Testing main chart kubeval..."
-          ../pre-commit-helm/hooks/helm-kubeval.sh || echo "Expected: Main chart kubeval failed"
+          echo "Testing main chart kubeconform..."
+          ../pre-commit-helm/hooks/helm-kubeconform.sh || echo "Expected: Main chart kubeconform failed"
 
           # Test template-errors chart (should fail)
           if [ -d "test-charts/template-errors" ]; then
             echo "Testing template-errors chart..."
             cd test-charts/template-errors
-            ../../../pre-commit-helm/hooks/helm-kubeval.sh || echo "Expected: Template errors chart failed"
+            ../../../pre-commit-helm/hooks/helm-kubeconform.sh || echo "Expected: Template errors chart failed"
             cd ../..
           fi
 
-          echo "helm-kubeval tests completed"
+          echo "helm-kubeconform tests completed"
 
       - name: Test helm-dependency-update hook
         run: |
@@ -250,9 +250,9 @@ jobs:
                   files: '(Chart\.yaml|values\.yaml|README\.md)$'
                   pass_filenames: false
                   always_run: false
-                - id: helm-kubeval
-                  name: Helm Kubeval
-                  entry: ../pre-commit-helm/hooks/helm-kubeval.sh
+                - id: helm-kubeconform
+                  name: Helm Kubeconform
+                  entry: ../pre-commit-helm/hooks/helm-kubeconform.sh
                   language: script
                   files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)$'
                   pass_filenames: false
