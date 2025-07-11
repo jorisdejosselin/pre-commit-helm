@@ -48,8 +48,8 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
             # Always create a tag for develop branch
             type=raw,value=develop,enable=${{ github.ref == 'refs/heads/develop' }}
-            # Fallback tag using short SHA
-            type=sha,prefix={{branch}}-
+            # Fallback tag using short SHA with proper prefix
+            type=sha,prefix=sha-
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
