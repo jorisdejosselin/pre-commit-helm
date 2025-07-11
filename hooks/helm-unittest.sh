@@ -17,10 +17,36 @@ function main() {
     exit 1
   fi
 
-  # Check if helm-unittest plugin is installed
-  if ! helm plugin list | grep -q "unittest"; then
-    echo "Error: helm-unittest plugin is not installed"
-    echo "Install it with: helm plugin install https://github.com/helm-unittest/helm-unittest"
+  # Check if unittest plugin is available
+  plugin_available=false
+  if helm plugin list | grep -q "unittest"; then
+    plugin_available=true
+  fi
+
+  # Alternative check: try to run helm unittest --help to see if it's available
+  if [ "$plugin_available" = false ]; then
+    if helm unittest --help &>/dev/null; then
+      plugin_available=true
+    fi
+  fi
+
+  # If still not available, try to install it
+  if [ "$plugin_available" = false ]; then
+    echo "helm-unittest plugin not found, attempting to install..."
+
+    # Try to install the plugin
+    if helm plugin install https://github.com/helm-unittest/helm-unittest; then
+      echo "Successfully installed helm-unittest plugin"
+      plugin_available=true
+    else
+      echo "Error: Failed to install helm-unittest plugin"
+      echo "Manual installation: helm plugin install https://github.com/helm-unittest/helm-unittest"
+      exit 1
+    fi
+  fi
+
+  if [ "$plugin_available" = false ]; then
+    echo "Error: helm-unittest plugin is not available"
     exit 1
   fi
 

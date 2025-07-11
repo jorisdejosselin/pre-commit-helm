@@ -35,8 +35,18 @@ RUN case ${TARGETARCH} in \
     && chmod +x /usr/local/bin/helm \
     && rm -rf helm-v${HELM_VERSION}-linux-${HELM_ARCH}.tar.gz linux-${HELM_ARCH}
 
-# Install helm-unittest plugin
+# Install helm-unittest plugin globally
+# First, set up a global helm plugins directory
+ENV HELM_PLUGINS=/usr/local/helm/plugins
+RUN mkdir -p $HELM_PLUGINS
+
+# Install helm-unittest plugin to the global location
 RUN helm plugin install https://github.com/helm-unittest/helm-unittest
+
+# Make sure the plugin is accessible to all users
+RUN chmod -R 755 /root/.local/share/helm/plugins/ 2>/dev/null || true
+RUN chmod -R 755 /root/.helm/plugins/ 2>/dev/null || true
+RUN chmod -R 755 $HELM_PLUGINS/ 2>/dev/null || true
 
 # Install helm-docs
 RUN go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
