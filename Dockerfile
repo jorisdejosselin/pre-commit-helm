@@ -23,11 +23,17 @@ ENV PATH=$PATH:$GOBIN
 
 # Install Helm
 ARG HELM_VERSION=3.14.0
-RUN wget https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
-    && tar xf helm-v${HELM_VERSION}-linux-amd64.tar.gz \
-    && mv linux-amd64/helm /usr/local/bin/helm \
+ARG TARGETARCH
+RUN case ${TARGETARCH} in \
+        "amd64")  HELM_ARCH=amd64  ;; \
+        "arm64")  HELM_ARCH=arm64  ;; \
+        *)        HELM_ARCH=amd64  ;; \
+    esac \
+    && wget https://get.helm.sh/helm-v${HELM_VERSION}-linux-${HELM_ARCH}.tar.gz \
+    && tar xf helm-v${HELM_VERSION}-linux-${HELM_ARCH}.tar.gz \
+    && mv linux-${HELM_ARCH}/helm /usr/local/bin/helm \
     && chmod +x /usr/local/bin/helm \
-    && rm -rf helm-v${HELM_VERSION}-linux-amd64.tar.gz linux-amd64
+    && rm -rf helm-v${HELM_VERSION}-linux-${HELM_ARCH}.tar.gz linux-${HELM_ARCH}
 
 # Install helm-unittest plugin
 RUN helm plugin install https://github.com/helm-unittest/helm-unittest
@@ -37,17 +43,27 @@ RUN go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
 
 # Install Trivy
 ARG TRIVY_VERSION=0.55.2
-RUN wget -qO- https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz | tar xz \
+RUN case ${TARGETARCH} in \
+        "amd64")  TRIVY_ARCH=64bit   ;; \
+        "arm64")  TRIVY_ARCH=ARM64   ;; \
+        *)        TRIVY_ARCH=64bit   ;; \
+    esac \
+    && wget -qO- https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-${TRIVY_ARCH}.tar.gz | tar xz \
     && mv trivy /usr/local/bin/trivy \
     && chmod +x /usr/local/bin/trivy
 
 # Install kubeconform
 ARG KUBECONFORM_VERSION=0.6.7
-RUN wget https://github.com/yannh/kubeconform/releases/download/v${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz \
-    && tar xf kubeconform-linux-amd64.tar.gz \
+RUN case ${TARGETARCH} in \
+        "amd64")  KUBE_ARCH=amd64  ;; \
+        "arm64")  KUBE_ARCH=arm64  ;; \
+        *)        KUBE_ARCH=amd64  ;; \
+    esac \
+    && wget https://github.com/yannh/kubeconform/releases/download/v${KUBECONFORM_VERSION}/kubeconform-linux-${KUBE_ARCH}.tar.gz \
+    && tar xf kubeconform-linux-${KUBE_ARCH}.tar.gz \
     && mv kubeconform /usr/local/bin/kubeconform \
     && chmod +x /usr/local/bin/kubeconform \
-    && rm kubeconform-linux-amd64.tar.gz
+    && rm kubeconform-linux-${KUBE_ARCH}.tar.gz
 
 # Install pre-commit
 RUN pip3 install pre-commit --break-system-packages
