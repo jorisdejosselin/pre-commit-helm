@@ -46,6 +46,10 @@ jobs:
             type=semver,pattern={{major}}
             # Tag with latest for main branch
             type=raw,value=latest,enable={{is_default_branch}}
+            # Always create a tag for develop branch
+            type=raw,value=develop,enable=${{ github.ref == 'refs/heads/develop' }}
+            # Fallback tag using short SHA
+            type=sha,prefix={{branch}}-
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
