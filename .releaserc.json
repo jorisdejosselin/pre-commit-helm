@@ -6,16 +6,81 @@
       "prerelease": "beta"
     }
   ],
-  "parserOpts": {
-    "noteKeywords": [
-      "BREAKING CHANGE",
-      "BREAKING CHANGES",
-      "BREAKING"
-    ]
-  },
   "plugins": [
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "parserOpts": {
+          "noteKeywords": [
+            "BREAKING CHANGE",
+            "BREAKING CHANGES",
+            "BREAKING"
+          ]
+        },
+        "releaseRules": [
+          {
+            "release": "minor",
+            "type": "feat"
+          },
+          {
+            "release": "patch",
+            "type": "fix"
+          },
+          {
+            "release": "patch",
+            "type": "docs"
+          },
+          {
+            "release": "patch",
+            "type": "style"
+          },
+          {
+            "release": "patch",
+            "type": "refactor"
+          },
+          {
+            "release": "patch",
+            "type": "perf"
+          },
+          {
+            "release": "patch",
+            "type": "test"
+          },
+          {
+            "release": "patch",
+            "type": "build"
+          },
+          {
+            "release": "patch",
+            "type": "ci"
+          },
+          {
+            "release": "patch",
+            "type": "chore"
+          },
+          {
+            "release": "patch",
+            "type": "revert"
+          },
+          {
+            "breaking": true,
+            "release": "major"
+          }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "parserOpts": {
+          "noteKeywords": [
+            "BREAKING CHANGE",
+            "BREAKING CHANGES",
+            "BREAKING"
+          ]
+        }
+      }
+    ],
     [
       "@semantic-release/changelog",
       {
@@ -33,55 +98,5 @@
     ],
     "@semantic-release/github"
   ],
-  "preset": "angular",
-  "releaseRules": [
-    {
-      "release": "minor",
-      "type": "feat"
-    },
-    {
-      "release": "patch",
-      "type": "fix"
-    },
-    {
-      "release": "patch",
-      "type": "docs"
-    },
-    {
-      "release": "patch",
-      "type": "style"
-    },
-    {
-      "release": "patch",
-      "type": "refactor"
-    },
-    {
-      "release": "patch",
-      "type": "perf"
-    },
-    {
-      "release": "patch",
-      "type": "test"
-    },
-    {
-      "release": "patch",
-      "type": "build"
-    },
-    {
-      "release": "patch",
-      "type": "ci"
-    },
-    {
-      "release": "patch",
-      "type": "chore"
-    },
-    {
-      "release": "patch",
-      "type": "revert"
-    },
-    {
-      "breaking": true,
-      "release": "major"
-    }
-  ]
+  "preset": "angular"
 }
