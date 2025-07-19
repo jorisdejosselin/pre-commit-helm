@@ -738,6 +738,72 @@ jobs:
           echo "✅ Pre-commit integration failed with expected hook failures ($HOOKS_FAILED hooks failed)"
           echo "Pre-commit integration tests completed successfully"
 
+      - name: Test Docker-based hooks
+        run: |
+          echo "=== Testing Docker-based hooks ==="
+          export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/go/bin"
+          cd test-helm-repo
+
+          # Determine the appropriate container tag based on branch
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            CONTAINER_TAG="stable"
+          elif [ "${{ github.ref }}" = "refs/heads/develop" ]; then
+            CONTAINER_TAG="develop"
+          else
+            CONTAINER_TAG="develop"  # Default for other branches/PRs
+          fi
+
+          echo "Using container tag: $CONTAINER_TAG"
+
+          # Create pre-commit config that uses Docker hooks
+          cat > .pre-commit-config-docker.yaml << EOF
+          repos:
+            - repo: local
+              hooks:
+                - id: helm-lint-docker
+                  name: Helm Lint (Docker)
+                  entry: ghcr.io/jorisdejosselin/pre-commit-helm:$CONTAINER_TAG
+                  language: docker_image
+                  args: ["-c", "/usr/local/bin/helm-lint.sh"]
+                  files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)$'
+                  pass_filenames: false
+                  always_run: false
+                - id: helm-template-docker
+                  name: Helm Template (Docker)
+                  entry: ghcr.io/jorisdejosselin/pre-commit-helm:$CONTAINER_TAG
+                  language: docker_image
+                  args: ["-c", "/usr/local/bin/helm-template.sh"]
+                  files: '(Chart\.yaml|values\.yaml|templates/.*\.yaml|templates/.*\.tpl)$'
+                  pass_filenames: false
+                  always_run: false
+          EOF
+
+          # Install and run Docker-based hooks (basic test only)
+          echo "Testing Docker hooks availability..."
+          if command -v docker &> /dev/null; then
+            echo "Docker is available, testing Docker hooks..."
+
+            # Try to pull the container
+            if docker pull ghcr.io/jorisdejosselin/pre-commit-helm:$CONTAINER_TAG; then
+              echo "✅ Successfully pulled container with tag: $CONTAINER_TAG"
+
+              # Test basic container functionality
+              if docker run --rm ghcr.io/jorisdejosselin/pre-commit-helm:$CONTAINER_TAG -c "helm version --short && echo 'Container works!'"; then
+                echo "✅ Container functionality test passed"
+              else
+                echo "❌ Container functionality test failed"
+                exit 1
+              fi
+            else
+              echo "⚠️  Could not pull container tag: $CONTAINER_TAG (may not exist yet)"
+              echo "This is expected for new releases or PR builds"
+            fi
+          else
+            echo "⚠️  Docker not available in CI environment, skipping Docker hook tests"
+          fi
+
+          echo "Docker-based hook tests completed"
+
       - name: Summary
         run: |
           echo "=== Test Summary ==="

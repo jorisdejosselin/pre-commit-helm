@@ -299,15 +299,15 @@ mychart/
 You can also use the container directly for testing or CI/CD:
 
 ```bash
-# Pull the latest container
-docker pull ghcr.io/jorisdejosselin/pre-commit-helm:latest
+# Pull the stable container
+docker pull ghcr.io/jorisdejosselin/pre-commit-helm:stable
 
 # Run hooks directly
-docker run --rm -v $(pwd):/workspace ghcr.io/jorisdejosselin/pre-commit-helm:latest \
+docker run --rm -v $(pwd):/workspace ghcr.io/jorisdejosselin/pre-commit-helm:stable \
   -c "cd /workspace && /usr/local/bin/helm-lint.sh"
 
 # Interactive shell with all tools available
-docker run -it --rm -v $(pwd):/workspace ghcr.io/jorisdejosselin/pre-commit-helm:latest
+docker run -it --rm -v $(pwd):/workspace ghcr.io/jorisdejosselin/pre-commit-helm:stable
 
 # Using docker-compose for development
 docker-compose up -d
@@ -316,10 +316,12 @@ docker-compose exec pre-commit-helm bash
 
 ### Available Container Tags
 
-- `latest` - Latest stable release
-- `main` - Latest commit from main branch
-- `develop` - Latest commit from develop branch
-- `v1.0.1` - Specific version tags
+- `stable`/`latest` - Latest stable release (recommended for production)
+- `develop` - Latest development/pre-release version
+- `v1.2.3` - Specific version tags (e.g., `v1.5.0`, `v2.0.0`)
+- `v1.2` - Major.minor version tags (automatically updated)
+- `v1` - Major version tags (automatically updated)
+- `main`/`develop` - Latest commit from respective branches (for CI/testing)
 
 ## Troubleshooting
 
