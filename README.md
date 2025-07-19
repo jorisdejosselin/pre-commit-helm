@@ -335,6 +335,8 @@ docker-compose exec pre-commit-helm bash
 - `develop` - Latest pre-release version (recommended for testing new features)
 - `v1.2.3-beta.1` - Specific pre-release version tags (e.g., `v1.5.0-beta.1`)
 
+> **Tip**: Pre-release containers are automatically built and tagged when semantic-release creates a new pre-release version.
+
 **Development:**
 - `main`/`develop` - Latest commit from respective branches (for CI/testing)
 - `sha-abc123` - Specific commit builds
