@@ -1,3 +1,10 @@
+# [1.1.0-beta.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.4...v1.1.0-beta.1) (2025-07-19)
+
+
+### Features
+
+* container pre-release and release tagging ([06aaeb1](https://github.com/jorisdejosselin/pre-commit-helm/commit/06aaeb17f604f37f4090b738f9110bb82e1e2257))
+
 ## [1.0.4](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.3...v1.0.4) (2025-07-19)
 
 ## [1.0.4-beta.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.4-beta.1...v1.0.4-beta.2) (2025-07-14)
