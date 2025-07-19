@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.2...v1.1.3) (2025-07-19)
+
+
+### Bug Fixes
+
+* correct enable condition syntax in docker metadata action ([50421bf](https://github.com/jorisdejosselin/pre-commit-helm/commit/50421bf1e3261b167f98a0ef10869cc5da1a4431))
+
 ## [1.1.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.1...v1.1.2) (2025-07-19)
 
 
