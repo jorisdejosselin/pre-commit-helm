@@ -1,3 +1,10 @@
+# [1.1.0-beta.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.1...v1.1.0-beta.2) (2025-07-19)
+
+
+### Bug Fixes
+
+* improve container tagging workflow to handle tag pushes correctly ([98ebc88](https://github.com/jorisdejosselin/pre-commit-helm/commit/98ebc8894cbca16b7106fe8e7bed0a78a3673de6))
+
 # [1.1.0-beta.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.4...v1.1.0-beta.1) (2025-07-19)
 
 
