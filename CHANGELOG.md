@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.1...v1.1.2) (2025-07-19)
+
+
+### Bug Fixes
+
+* move checkout step before release info retrieval ([de61c8c](https://github.com/jorisdejosselin/pre-commit-helm/commit/de61c8ca5f938b843d3fd190ca4878795d36b1d0))
+
 ## [1.1.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0...v1.1.1) (2025-07-19)
 
 
