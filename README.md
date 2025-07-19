@@ -339,7 +339,7 @@ docker-compose exec pre-commit-helm bash
 
 **Development:**
 - `main`/`develop` - Latest commit from respective branches (for CI/testing)
-- `sha-abc123` - Specific commit builds
+- `sha-abc123` - Specific commit builds (includes commit SHA for identification)
 
 ## Troubleshooting
 
