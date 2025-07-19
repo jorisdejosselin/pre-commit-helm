@@ -5,6 +5,13 @@
 
 * container pre-release and release tagging ([#24](https://github.com/jorisdejosselin/pre-commit-helm/issues/24)) ([e35501c](https://github.com/jorisdejosselin/pre-commit-helm/commit/e35501c6e7e7540ea86b9e991027cba62f8f7b56))
 
+# [1.1.0](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.4...v1.1.0) (2025-07-19)
+
+
+### Features
+
+* container pre-release and release tagging ([#24](https://github.com/jorisdejosselin/pre-commit-helm/issues/24)) ([e35501c](https://github.com/jorisdejosselin/pre-commit-helm/commit/e35501c6e7e7540ea86b9e991027cba62f8f7b56))
+
 # [1.1.0-beta.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.1...v1.1.0-beta.2) (2025-07-19)
 
 
