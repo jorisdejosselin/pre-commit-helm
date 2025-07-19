@@ -29,7 +29,7 @@ The easiest way to use these hooks is with our pre-built container that includes
 # .pre-commit-config.yaml
 repos:
   - repo: https://github.com/jorisdejosselin/pre-commit-helm
-    rev: v1.0.1  # Use the latest version
+    rev: v1.0.1  # Use the latest stable version
     hooks:
       - id: helm-lint-docker
       - id: helm-template-docker
@@ -39,6 +39,9 @@ repos:
       - id: helm-dependency-update-docker
       - id: helm-kubeconform-docker
 ```
+
+> **Note**: For testing pre-release features, you can use a pre-release tag like `v1.5.0-beta.1`.
+> The Docker hooks will automatically use the corresponding container tag.
 
 **Benefits:**
 - ✅ No need to install Helm, trivy, kubeconform, or other dependencies
@@ -302,6 +305,12 @@ You can also use the container directly for testing or CI/CD:
 # Pull the stable container
 docker pull ghcr.io/jorisdejosselin/pre-commit-helm:stable
 
+# Or pull a specific version
+docker pull ghcr.io/jorisdejosselin/pre-commit-helm:v1.5.0
+
+# Or pull the latest pre-release for testing
+docker pull ghcr.io/jorisdejosselin/pre-commit-helm:develop
+
 # Run hooks directly
 docker run --rm -v $(pwd):/workspace ghcr.io/jorisdejosselin/pre-commit-helm:stable \
   -c "cd /workspace && /usr/local/bin/helm-lint.sh"
@@ -316,12 +325,19 @@ docker-compose exec pre-commit-helm bash
 
 ### Available Container Tags
 
+**Stable Releases:**
 - `stable`/`latest` - Latest stable release (recommended for production)
-- `develop` - Latest development/pre-release version
-- `v1.2.3` - Specific version tags (e.g., `v1.5.0`, `v2.0.0`)
-- `v1.2` - Major.minor version tags (automatically updated)
-- `v1` - Major version tags (automatically updated)
+- `v1.2.3` - Specific stable version tags (e.g., `v1.5.0`, `v2.0.0`)
+- `v1.2` - Major.minor version tags (automatically updated for stable releases)
+- `v1` - Major version tags (automatically updated for stable releases)
+
+**Pre-releases:**
+- `develop` - Latest pre-release version (recommended for testing new features)
+- `v1.2.3-beta.1` - Specific pre-release version tags (e.g., `v1.5.0-beta.1`)
+
+**Development:**
 - `main`/`develop` - Latest commit from respective branches (for CI/testing)
+- `sha-abc123` - Specific commit builds
 
 ## Troubleshooting
 
