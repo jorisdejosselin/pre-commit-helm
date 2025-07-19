@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0...v1.1.1) (2025-07-19)
+
+
+### Bug Fixes
+
+* implement workflow dependency for container builds ([caf8341](https://github.com/jorisdejosselin/pre-commit-helm/commit/caf83418fbf971053dbec0c4998a1d1e272afaa0))
+
 # [1.1.0](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.4...v1.1.0) (2025-07-19)
 
 
