@@ -341,7 +341,7 @@ docker-compose exec pre-commit-helm bash
 - `main`/`develop` - Latest commit from respective branches (for CI/testing)
 - `sha-abc123` - Specific commit builds (includes commit SHA for identification)
 
-> **Note**: Container builds are triggered automatically when semantic-release creates new releases.
+> **Note**: Container builds are automatically triggered after semantic-release creates new releases using GitHub Actions workflow dependencies. This ensures containers get proper version tags instead of just SHA-based tags.
 
 ## Troubleshooting
 
