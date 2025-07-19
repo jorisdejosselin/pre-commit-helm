@@ -40,20 +40,26 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            # Semantic version tags for tag pushes and releases
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}},enable=${{ !contains(github.ref, 'beta') && !contains(github.ref, 'alpha') && !contains(github.ref, 'rc') }}
-            type=semver,pattern={{major}},enable=${{ !contains(github.ref, 'beta') && !contains(github.ref, 'alpha') && !contains(github.ref, 'rc') }}
-            # Latest tag for stable releases (non-prerelease)
-            type=raw,value=latest,enable=${{ github.event_name == 'release' && !github.event.release.prerelease || startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'beta') && !contains(github.ref, 'alpha') && !contains(github.ref, 'rc') }}
-            # Stable tag for stable releases (non-prerelease)
-            type=raw,value=stable,enable=${{ github.event_name == 'release' && !github.event.release.prerelease || startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'beta') && !contains(github.ref, 'alpha') && !contains(github.ref, 'rc') }}
+            # Semantic version tags - only for tag pushes
+            type=semver,pattern={{version}},enable=${{ startsWith(github.ref, 'refs/tags/v') }}
+            type=semver,pattern={{major}}.{{minor}},enable=${{ startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'beta') && !contains(github.ref, 'alpha') && !contains(github.ref, 'rc') }}
+            type=semver,pattern={{major}},enable=${{ startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'beta') && !contains(github.ref, 'alpha') && !contains(github.ref, 'rc') }}
+            # Version tags from release events
+            type=raw,value=${{ github.event.release.tag_name }},enable=${{ github.event_name == 'release' }}
+            # Major.minor version for stable releases only
+            type=semver,pattern={{major}}.{{minor}},value=${{ github.event.release.tag_name }},enable=${{ github.event_name == 'release' && !github.event.release.prerelease }}
+            # Major version for stable releases only
+            type=semver,pattern={{major}},value=${{ github.event.release.tag_name }},enable=${{ github.event_name == 'release' && !github.event.release.prerelease }}
+            # Latest tag for stable releases
+            type=raw,value=latest,enable=${{ github.event_name == 'release' && !github.event.release.prerelease }}
+            # Stable tag for stable releases
+            type=raw,value=stable,enable=${{ github.event_name == 'release' && !github.event.release.prerelease }}
             # Develop tag for prerelease versions or develop branch
-            type=raw,value=develop,enable=${{ github.event_name == 'release' && github.event.release.prerelease || startsWith(github.ref, 'refs/tags/v') && (contains(github.ref, 'beta') || contains(github.ref, 'alpha') || contains(github.ref, 'rc')) || github.ref == 'refs/heads/develop' }}
+            type=raw,value=develop,enable=${{ github.event_name == 'release' && github.event.release.prerelease || github.ref == 'refs/heads/develop' }}
             # Branch name tags for branch pushes
-            type=ref,event=branch
+            type=ref,event=branch,enable=${{ github.event_name == 'push' }}
             # Fallback SHA tag for non-release builds
-            type=sha,prefix=sha-,enable=${{ github.event_name != 'release' && !startsWith(github.ref, 'refs/tags/') }}
+            type=sha,prefix=sha-,enable=${{ github.event_name == 'push' }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
