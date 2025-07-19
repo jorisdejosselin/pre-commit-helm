@@ -68,15 +68,15 @@ jobs:
             # Major version for stable releases only
             type=semver,pattern={{major}},value=${{ github.event.release.tag_name }},enable=${{ github.event_name == 'release' && !github.event.release.prerelease }}
             # Version tags from workflow_run after release
-            type=raw,value=${{ steps.latest_release.outputs.tag }},enable=${{ github.event_name == 'workflow_run' && steps.latest_release.outputs.tag }}
-            type=semver,pattern={{major}}.{{minor}},value=${{ steps.latest_release.outputs.tag }},enable=${{ github.event_name == 'workflow_run' && steps.latest_release.outputs.tag && !contains(steps.latest_release.outputs.tag, 'beta') }}
-            type=semver,pattern={{major}},value=${{ steps.latest_release.outputs.tag }},enable=${{ github.event_name == 'workflow_run' && steps.latest_release.outputs.tag && !contains(steps.latest_release.outputs.tag, 'beta') }}
+            type=raw,value=${{ steps.latest_release.outputs.tag }},enable=${{ github.event_name == 'workflow_run' && steps.latest_release.outputs.tag != '' }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ steps.latest_release.outputs.tag }},enable=${{ github.event_name == 'workflow_run' && steps.latest_release.outputs.tag != '' && !contains(steps.latest_release.outputs.tag, 'beta') }}
+            type=semver,pattern={{major}},value=${{ steps.latest_release.outputs.tag }},enable=${{ github.event_name == 'workflow_run' && steps.latest_release.outputs.tag != '' && !contains(steps.latest_release.outputs.tag, 'beta') }}
             # Latest tag for stable releases
-            type=raw,value=latest,enable=${{ github.event_name == 'release' && !github.event.release.prerelease || github.event_name == 'workflow_run' && steps.latest_release.outputs.tag && !contains(steps.latest_release.outputs.tag, 'beta') }}
+            type=raw,value=latest,enable=${{ github.event_name == 'release' && !github.event.release.prerelease || github.event_name == 'workflow_run' && steps.latest_release.outputs.tag != '' && !contains(steps.latest_release.outputs.tag, 'beta') }}
             # Stable tag for stable releases
-            type=raw,value=stable,enable=${{ github.event_name == 'release' && !github.event.release.prerelease || github.event_name == 'workflow_run' && steps.latest_release.outputs.tag && !contains(steps.latest_release.outputs.tag, 'beta') }}
+            type=raw,value=stable,enable=${{ github.event_name == 'release' && !github.event.release.prerelease || github.event_name == 'workflow_run' && steps.latest_release.outputs.tag != '' && !contains(steps.latest_release.outputs.tag, 'beta') }}
             # Develop tag for prerelease versions or develop branch
-            type=raw,value=develop,enable=${{ github.event_name == 'release' && github.event.release.prerelease || github.event_name == 'workflow_run' && steps.latest_release.outputs.tag && contains(steps.latest_release.outputs.tag, 'beta') || github.ref == 'refs/heads/develop' }}
+            type=raw,value=develop,enable=${{ github.event_name == 'release' && github.event.release.prerelease || github.event_name == 'workflow_run' && steps.latest_release.outputs.tag != '' && contains(steps.latest_release.outputs.tag, 'beta') || github.ref == 'refs/heads/develop' }}
             # Branch name tags for branch pushes
             type=ref,event=branch,enable=${{ github.event_name == 'push' }}
             # Fallback SHA tag for non-release builds
