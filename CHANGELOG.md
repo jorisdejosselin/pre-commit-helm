@@ -13,6 +13,18 @@
 # [1.1.0](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.4...v1.1.0) (2025-07-19)
 
 
+### Bug Fixes
+
+* improve container workflow to properly handle release events for version tagging ([137cf13](https://github.com/jorisdejosselin/pre-commit-helm/commit/137cf130ae8fb77c1e7e924291f00f907825ef40))
+
+
+### Features
+
+* container pre-release and release tagging ([#24](https://github.com/jorisdejosselin/pre-commit-helm/issues/24)) ([e35501c](https://github.com/jorisdejosselin/pre-commit-helm/commit/e35501c6e7e7540ea86b9e991027cba62f8f7b56))
+
+# [1.1.0](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.4...v1.1.0) (2025-07-19)
+
+
 ### Features
 
 * container pre-release and release tagging ([#24](https://github.com/jorisdejosselin/pre-commit-helm/issues/24)) ([e35501c](https://github.com/jorisdejosselin/pre-commit-helm/commit/e35501c6e7e7540ea86b9e991027cba62f8f7b56))
