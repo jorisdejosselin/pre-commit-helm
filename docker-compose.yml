@@ -3,7 +3,7 @@ version: "3.8"
 services:
   pre-commit-helm:
     build: .
-    image: ghcr.io/jorisdejosselin/pre-commit-helm:latest
+    image: ghcr.io/jorisdejosselin/pre-commit-helm:stable
     container_name: pre-commit-helm
     volumes:
       # Mount your chart directory here
