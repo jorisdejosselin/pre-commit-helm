@@ -1,3 +1,5 @@
+# [1.1.0-beta.10](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.9...v1.1.0-beta.10) (2025-10-08)
+
 # [1.1.0-beta.9](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.8...v1.1.0-beta.9) (2025-10-06)
 
 # [1.1.0-beta.8](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.7...v1.1.0-beta.8) (2025-10-01)
