@@ -10,7 +10,7 @@ jobs:
   test-hooks-against-test-repo:
     runs-on: ubuntu-latest
     container:
-      image: python:3.13-alpine@sha256:9ba6d8cbebf0fb6546ae71f2a1c14f6ffd2fdab83af7fa5669734ef30ad48844
+      image: python:3.14-alpine@sha256:961b74dee425a9c6446d4cc249a1337bf2f6f762865662c1e4f05a84de4940fd
       options: --user root
     env:
       PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/go/bin"
