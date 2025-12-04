@@ -1,4 +1,4 @@
-FROM alpine:3.22
+FROM alpine:3.23
 
 # Set labels for GitHub Container Registry
 LABEL org.opencontainers.image.source="https://github.com/jorisdejosselin/pre-commit-helm"
