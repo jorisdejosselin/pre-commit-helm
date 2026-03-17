@@ -14,7 +14,7 @@
   "commitMessageExtra": "to {{newValue}}",
   "commitMessagePrefix": "chore(deps): ",
   "commitMessageTopic": "{{depName}}",
-  "configMigration": true,
+  "configMigration": false,
   "customManagers": [
     {
       "customType": "regex",
