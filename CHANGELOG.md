@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.3...v1.1.4) (2026-03-17)
+
+
+### Bug Fixes
+
+* **renovate:** disable configMigration to fix JSON5 parse crash ([4756ccc](https://github.com/jorisdejosselin/pre-commit-helm/commit/4756ccc8a6017f31a5ba09c403a07b3bcd7bee5a))
+
 ## [1.1.3](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.2...v1.1.3) (2025-07-19)
 
 
