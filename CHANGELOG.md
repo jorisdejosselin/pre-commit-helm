@@ -1,3 +1,10 @@
+# [1.1.0-beta.45](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.44...v1.1.0-beta.45) (2026-08-23)
+
+
+### Bug Fixes
+
+* **ci:** upgrade and pin helm toolchain to unblock hook tests ([#74](https://github.com/jorisdejosselin/pre-commit-helm/issues/74)) ([3d5889c](https://github.com/jorisdejosselin/pre-commit-helm/commit/3d5889c43d1bfb2b2678088e5ecf72c34d69571b))
+
 # [1.1.0-beta.44](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.43...v1.1.0-beta.44) (2026-08-21)
 
 # [1.1.0-beta.43](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.42...v1.1.0-beta.43) (2026-08-06)
