@@ -21,7 +21,7 @@ jobs:
       # renovate: datasource=github-releases depName=norwoodj/helm-docs
       HELM_DOCS_VERSION: "1.14.2"
       # renovate: datasource=github-releases depName=aquasecurity/trivy
-      TRIVY_VERSION: "0.73.0"
+      TRIVY_VERSION: "0.74.0"
       # renovate: datasource=github-releases depName=yannh/kubeconform
       KUBECONFORM_VERSION: "0.8.0"
     steps:
