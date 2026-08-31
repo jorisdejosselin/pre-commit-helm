@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.4...v1.1.5) (2026-08-31)
+
+
+### Bug Fixes
+
+* **ci:** repair helm toolchain and container build pipelines ([960bf09](https://github.com/jorisdejosselin/pre-commit-helm/commit/960bf09db321bccbefe14777aa97faf6c5f3a6fe)), closes [#75](https://github.com/jorisdejosselin/pre-commit-helm/issues/75) [#75](https://github.com/jorisdejosselin/pre-commit-helm/issues/75)
+
 ## [1.1.5-beta.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.5-beta.1...v1.1.5-beta.2) (2026-08-31)
 
 
