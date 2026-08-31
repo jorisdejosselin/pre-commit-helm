@@ -1,3 +1,10 @@
+## [1.1.5-beta.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.5-beta.1...v1.1.5-beta.2) (2026-08-31)
+
+
+### Bug Fixes
+
+* **ci:** pin helm back to 3.x and stop PR builds pushing untagged images ([5a39bfb](https://github.com/jorisdejosselin/pre-commit-helm/commit/5a39bfb13a1c02c9debb615dfa833a7de3d8e06e)), closes [#78](https://github.com/jorisdejosselin/pre-commit-helm/issues/78) [#74](https://github.com/jorisdejosselin/pre-commit-helm/issues/74)
+
 ## [1.1.5-beta.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.4...v1.1.5-beta.1) (2026-08-31)
 
 
