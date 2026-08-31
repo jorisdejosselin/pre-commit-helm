@@ -33,7 +33,7 @@
         "/^\\.?docker-compose.*\\.ya?ml$/"
       ],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\s+[A-Z_]+\\s*[=:]\\s*[\"']?(?<currentValue>[^\\s\"']+)[\"']?"
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\s+(?:(?:ARG|ENV)\\s+)?[A-Z_]+\\s*[=:]\\s*[\"']?(?<currentValue>[^\\s\"']+)[\"']?"
       ]
     }
   ],
@@ -120,6 +120,16 @@
         "helmv3"
       ],
       "prPriority": 7
+    },
+    {
+      "allowedVersions": "<4.0.0",
+      "description": "Stay on the Helm 3.x line - Helm 4 is a deliberate migration, not an automerge",
+      "matchDatasources": [
+        "github-releases"
+      ],
+      "matchPackageNames": [
+        "helm/helm"
+      ]
     },
     {
       "addLabels": [

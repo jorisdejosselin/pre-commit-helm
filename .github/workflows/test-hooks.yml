@@ -10,13 +10,23 @@ jobs:
   test-hooks-against-test-repo:
     runs-on: ubuntu-latest
     container:
-      image: python:3.13-alpine@sha256:9b4929a72599b6c6389ece4ecbf415fd1355129f22bb92bb137eea098f05e975
+      image: python:3.14-alpine@sha256:05b2b8b732ecd268fee8727a369f936f022d1321b59befd13c30ede22769dcdc
       options: --user root
     env:
       PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/go/bin"
+      # renovate: datasource=github-releases depName=helm/helm
+      HELM_VERSION: "3.21.4"
+      # renovate: datasource=github-releases depName=helm-unittest/helm-unittest
+      HELM_UNITTEST_VERSION: "1.1.2"
+      # renovate: datasource=github-releases depName=norwoodj/helm-docs
+      HELM_DOCS_VERSION: "1.14.2"
+      # renovate: datasource=github-releases depName=aquasecurity/trivy
+      TRIVY_VERSION: "0.74.0"
+      # renovate: datasource=github-releases depName=yannh/kubeconform
+      KUBECONFORM_VERSION: "0.8.0"
     steps:
       - name: Checkout pre-commit-helm
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           path: pre-commit-helm
 
@@ -35,8 +45,8 @@ jobs:
           apk add --no-cache bash curl wget git go
 
           # Install helm
-          wget https://get.helm.sh/helm-v3.14.0-linux-amd64.tar.gz
-          tar xf helm-v3.14.0-linux-amd64.tar.gz
+          wget https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz
+          tar xf helm-v${HELM_VERSION}-linux-amd64.tar.gz
           mv linux-amd64/helm /usr/local/bin/helm
           chmod +x /usr/local/bin/helm
 
@@ -44,7 +54,7 @@ jobs:
           pip install pre-commit
 
           # Install helm-unittest
-          helm plugin install https://github.com/helm-unittest/helm-unittest
+          helm plugin install https://github.com/helm-unittest/helm-unittest --version v${HELM_UNITTEST_VERSION}
 
           # Install helm-docs with proper Go environment setup
           echo "Setting up Go environment..."
@@ -60,7 +70,7 @@ jobs:
           echo "GOROOT: $GOROOT"
 
           echo "Installing helm-docs..."
-          if go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest; then
+          if go install github.com/norwoodj/helm-docs/cmd/helm-docs@v${HELM_DOCS_VERSION}; then
             echo "helm-docs go install succeeded"
           else
             echo "helm-docs go install failed"
@@ -95,12 +105,12 @@ jobs:
           echo "Current PATH during setup: $PATH"
 
           # Install trivy
-          wget -qO- https://github.com/aquasecurity/trivy/releases/download/v0.55.2/trivy_0.55.2_Linux-64bit.tar.gz | tar xz
+          wget -qO- https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz | tar xz
           mv trivy /usr/local/bin/trivy
           chmod +x /usr/local/bin/trivy
 
           # Install kubeconform
-          wget https://github.com/yannh/kubeconform/releases/download/v0.6.7/kubeconform-linux-amd64.tar.gz
+          wget https://github.com/yannh/kubeconform/releases/download/v${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz
           tar xf kubeconform-linux-amd64.tar.gz
           mv kubeconform /usr/local/bin/kubeconform
           chmod +x /usr/local/bin/kubeconform
