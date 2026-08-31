@@ -1,103 +1,56 @@
-# [1.1.0-beta.48](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.47...v1.1.0-beta.48) (2026-08-30)
-
-# [1.1.0-beta.47](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.46...v1.1.0-beta.47) (2026-08-25)
-
-# [1.1.0-beta.46](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.45...v1.1.0-beta.46) (2026-08-24)
-
-# [1.1.0-beta.45](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.44...v1.1.0-beta.45) (2026-08-23)
+## [1.1.4](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.3...v1.1.4) (2026-03-17)
 
 
 ### Bug Fixes
 
-* **ci:** upgrade and pin helm toolchain to unblock hook tests ([#74](https://github.com/jorisdejosselin/pre-commit-helm/issues/74)) ([3d5889c](https://github.com/jorisdejosselin/pre-commit-helm/commit/3d5889c43d1bfb2b2678088e5ecf72c34d69571b))
+* **renovate:** disable configMigration to fix JSON5 parse crash ([4756ccc](https://github.com/jorisdejosselin/pre-commit-helm/commit/4756ccc8a6017f31a5ba09c403a07b3bcd7bee5a))
 
-# [1.1.0-beta.44](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.43...v1.1.0-beta.44) (2026-08-21)
+## [1.1.3](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.2...v1.1.3) (2025-07-19)
 
-# [1.1.0-beta.43](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.42...v1.1.0-beta.43) (2026-08-06)
 
-# [1.1.0-beta.42](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.41...v1.1.0-beta.42) (2026-07-22)
+### Bug Fixes
 
-# [1.1.0-beta.41](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.40...v1.1.0-beta.41) (2026-07-16)
+* correct enable condition syntax in docker metadata action ([50421bf](https://github.com/jorisdejosselin/pre-commit-helm/commit/50421bf1e3261b167f98a0ef10869cc5da1a4431))
 
-# [1.1.0-beta.40](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.39...v1.1.0-beta.40) (2026-07-05)
+## [1.1.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.1...v1.1.2) (2025-07-19)
 
-# [1.1.0-beta.39](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.38...v1.1.0-beta.39) (2026-06-29)
 
-# [1.1.0-beta.38](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.37...v1.1.0-beta.38) (2026-06-25)
+### Bug Fixes
 
-# [1.1.0-beta.37](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.36...v1.1.0-beta.37) (2026-06-23)
+* move checkout step before release info retrieval ([de61c8c](https://github.com/jorisdejosselin/pre-commit-helm/commit/de61c8ca5f938b843d3fd190ca4878795d36b1d0))
 
-# [1.1.0-beta.36](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.35...v1.1.0-beta.36) (2026-06-20)
+## [1.1.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0...v1.1.1) (2025-07-19)
 
-# [1.1.0-beta.35](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.34...v1.1.0-beta.35) (2026-06-11)
 
-# [1.1.0-beta.34](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.33...v1.1.0-beta.34) (2026-06-10)
+### Bug Fixes
 
-# [1.1.0-beta.33](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.32...v1.1.0-beta.33) (2026-05-25)
+* implement workflow dependency for container builds ([caf8341](https://github.com/jorisdejosselin/pre-commit-helm/commit/caf83418fbf971053dbec0c4998a1d1e272afaa0))
 
-# [1.1.0-beta.32](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.31...v1.1.0-beta.32) (2026-05-22)
+# [1.1.0](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.4...v1.1.0) (2025-07-19)
 
-# [1.1.0-beta.31](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.30...v1.1.0-beta.31) (2026-05-04)
 
-# [1.1.0-beta.30](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.29...v1.1.0-beta.30) (2026-04-22)
+### Bug Fixes
 
-# [1.1.0-beta.29](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.28...v1.1.0-beta.29) (2026-04-13)
+* improve container workflow to properly handle release events for version tagging ([137cf13](https://github.com/jorisdejosselin/pre-commit-helm/commit/137cf130ae8fb77c1e7e924291f00f907825ef40))
 
-# [1.1.0-beta.28](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.27...v1.1.0-beta.28) (2026-04-09)
 
-# [1.1.0-beta.27](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.26...v1.1.0-beta.27) (2026-03-13)
+### Features
 
-# [1.1.0-beta.26](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.25...v1.1.0-beta.26) (2026-03-11)
+* container pre-release and release tagging ([#24](https://github.com/jorisdejosselin/pre-commit-helm/issues/24)) ([e35501c](https://github.com/jorisdejosselin/pre-commit-helm/commit/e35501c6e7e7540ea86b9e991027cba62f8f7b56))
 
-# [1.1.0-beta.25](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.24...v1.1.0-beta.25) (2026-03-09)
+# [1.1.0](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.4...v1.1.0) (2025-07-19)
 
-# [1.1.0-beta.24](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.23...v1.1.0-beta.24) (2026-03-06)
 
-# [1.1.0-beta.23](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.22...v1.1.0-beta.23) (2026-02-12)
+### Bug Fixes
 
-# [1.1.0-beta.22](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.21...v1.1.0-beta.22) (2026-02-04)
+* improve container workflow to properly handle release events for version tagging ([137cf13](https://github.com/jorisdejosselin/pre-commit-helm/commit/137cf130ae8fb77c1e7e924291f00f907825ef40))
 
-# [1.1.0-beta.21](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.20...v1.1.0-beta.21) (2026-01-29)
 
-# [1.1.0-beta.20](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.19...v1.1.0-beta.20) (2026-01-23)
+### Features
 
-# [1.1.0-beta.19](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.18...v1.1.0-beta.19) (2026-01-19)
+* container pre-release and release tagging ([#24](https://github.com/jorisdejosselin/pre-commit-helm/issues/24)) ([e35501c](https://github.com/jorisdejosselin/pre-commit-helm/commit/e35501c6e7e7540ea86b9e991027cba62f8f7b56))
 
-# [1.1.0-beta.18](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.17...v1.1.0-beta.18) (2025-12-20)
-
-# [1.1.0-beta.17](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.16...v1.1.0-beta.17) (2025-12-15)
-
-# [1.1.0-beta.16](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.15...v1.1.0-beta.16) (2025-12-04)
-
-# [1.1.0-beta.15](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.14...v1.1.0-beta.15) (2025-11-29)
-
-# [1.1.0-beta.14](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.13...v1.1.0-beta.14) (2025-11-28)
-
-# [1.1.0-beta.13](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.12...v1.1.0-beta.13) (2025-11-25)
-
-# [1.1.0-beta.12](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.11...v1.1.0-beta.12) (2025-11-24)
-
-# [1.1.0-beta.11](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.10...v1.1.0-beta.11) (2025-11-24)
-
-# [1.1.0-beta.10](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.9...v1.1.0-beta.10) (2025-10-08)
-
-# [1.1.0-beta.9](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.8...v1.1.0-beta.9) (2025-10-06)
-
-# [1.1.0-beta.8](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.7...v1.1.0-beta.8) (2025-10-01)
-
-# [1.1.0-beta.7](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.6...v1.1.0-beta.7) (2025-09-12)
-
-# [1.1.0-beta.6](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.5...v1.1.0-beta.6) (2025-09-11)
-
-# [1.1.0-beta.5](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.4...v1.1.0-beta.5) (2025-08-19)
-
-# [1.1.0-beta.4](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.3...v1.1.0-beta.4) (2025-08-18)
-
-# [1.1.0-beta.3](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.2...v1.1.0-beta.3) (2025-08-12)
-
-# [1.1.0-beta.2](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.0-beta.1...v1.1.0-beta.2) (2025-08-08)
-
-# [1.1.0-beta.1](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.4...v1.1.0-beta.1) (2025-08-03)
+# [1.1.0](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.0.4...v1.1.0) (2025-07-19)
 
 
 ### Features

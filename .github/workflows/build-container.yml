@@ -2,12 +2,16 @@ name: Build and Push Container
 
 on:
   push:
-    branches: [main, develop]
-    tags: ["v*"]
+    branches: [develop] # Only develop for branch builds
+    tags: ["v*"] # Direct tag pushes
   pull_request:
     branches: [main]
   release:
-    types: [published]
+    types: [published] # When semantic-release creates releases
+  workflow_run:
+    workflows: ["Release"]
+    types: [completed]
+    branches: [main, develop]
 
 env:
   REGISTRY: ghcr.io
@@ -16,6 +20,8 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    # Only run if release workflow succeeded, or for other trigger types
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     permissions:
       contents: read
       packages: write
@@ -23,6 +29,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Get latest release info (for workflow_run events)
+        if: github.event_name == 'workflow_run'
+        id: latest_release
+        run: |
+          # Get the latest release tag
+          LATEST_TAG=$(gh release list --limit 1 --json tagName --jq '.[0].tagName')
+          echo "tag=$LATEST_TAG" >> $GITHUB_OUTPUT
+          echo "Latest release tag: $LATEST_TAG"
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@37fe631027851001ddb9b187196cc803df7f5f0e # v4
@@ -40,20 +57,30 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            # Semantic version tags for tag pushes and releases
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}},enable=${{ !contains(github.ref, 'beta') && !contains(github.ref, 'alpha') && !contains(github.ref, 'rc') }}
-            type=semver,pattern={{major}},enable=${{ !contains(github.ref, 'beta') && !contains(github.ref, 'alpha') && !contains(github.ref, 'rc') }}
-            # Latest tag for stable releases (non-prerelease)
-            type=raw,value=latest,enable=${{ github.event_name == 'release' && !github.event.release.prerelease || startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'beta') && !contains(github.ref, 'alpha') && !contains(github.ref, 'rc') }}
-            # Stable tag for stable releases (non-prerelease)
-            type=raw,value=stable,enable=${{ github.event_name == 'release' && !github.event.release.prerelease || startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'beta') && !contains(github.ref, 'alpha') && !contains(github.ref, 'rc') }}
+            # Semantic version tags - only for tag pushes
+            type=semver,pattern={{version}},enable=${{ startsWith(github.ref, 'refs/tags/v') }}
+            type=semver,pattern={{major}}.{{minor}},enable=${{ startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'beta') && !contains(github.ref, 'alpha') && !contains(github.ref, 'rc') }}
+            type=semver,pattern={{major}},enable=${{ startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'beta') && !contains(github.ref, 'alpha') && !contains(github.ref, 'rc') }}
+            # Version tags from release events
+            type=raw,value=${{ github.event.release.tag_name }},enable=${{ github.event_name == 'release' }}
+            # Major.minor version for stable releases only
+            type=semver,pattern={{major}}.{{minor}},value=${{ github.event.release.tag_name }},enable=${{ github.event_name == 'release' && !github.event.release.prerelease }}
+            # Major version for stable releases only
+            type=semver,pattern={{major}},value=${{ github.event.release.tag_name }},enable=${{ github.event_name == 'release' && !github.event.release.prerelease }}
+            # Version tags from workflow_run after release
+            type=raw,value=${{ steps.latest_release.outputs.tag }},enable=${{ github.event_name == 'workflow_run' && steps.latest_release.outputs.tag != '' }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ steps.latest_release.outputs.tag }},enable=${{ github.event_name == 'workflow_run' && steps.latest_release.outputs.tag != '' && !contains(steps.latest_release.outputs.tag, 'beta') }}
+            type=semver,pattern={{major}},value=${{ steps.latest_release.outputs.tag }},enable=${{ github.event_name == 'workflow_run' && steps.latest_release.outputs.tag != '' && !contains(steps.latest_release.outputs.tag, 'beta') }}
+            # Latest tag for stable releases
+            type=raw,value=latest,enable=${{ github.event_name == 'release' && !github.event.release.prerelease || github.event_name == 'workflow_run' && steps.latest_release.outputs.tag != '' && !contains(steps.latest_release.outputs.tag, 'beta') }}
+            # Stable tag for stable releases
+            type=raw,value=stable,enable=${{ github.event_name == 'release' && !github.event.release.prerelease || github.event_name == 'workflow_run' && steps.latest_release.outputs.tag != '' && !contains(steps.latest_release.outputs.tag, 'beta') }}
             # Develop tag for prerelease versions or develop branch
-            type=raw,value=develop,enable=${{ github.event_name == 'release' && github.event.release.prerelease || startsWith(github.ref, 'refs/tags/v') && (contains(github.ref, 'beta') || contains(github.ref, 'alpha') || contains(github.ref, 'rc')) || github.ref == 'refs/heads/develop' }}
+            type=raw,value=develop,enable=${{ github.event_name == 'release' && github.event.release.prerelease || github.event_name == 'workflow_run' && steps.latest_release.outputs.tag != '' && contains(steps.latest_release.outputs.tag, 'beta') || github.ref == 'refs/heads/develop' }}
             # Branch name tags for branch pushes
-            type=ref,event=branch
+            type=ref,event=branch,enable=${{ github.event_name == 'push' }}
             # Fallback SHA tag for non-release builds
-            type=sha,prefix=sha-,enable=${{ github.event_name != 'release' && !startsWith(github.ref, 'refs/tags/') }}
+            type=sha,prefix=sha-,enable=${{ github.event_name == 'push' }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7
