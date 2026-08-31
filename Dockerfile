@@ -23,7 +23,7 @@ ENV PATH=$PATH:$GOBIN
 
 # Install Helm
 # renovate: datasource=github-releases depName=helm/helm
-ARG HELM_VERSION=3.21.3
+ARG HELM_VERSION=3.21.4
 ARG TARGETARCH
 RUN case ${TARGETARCH} in \
         "amd64")  HELM_ARCH=amd64  ;; \
@@ -58,7 +58,7 @@ RUN go install github.com/norwoodj/helm-docs/cmd/helm-docs@v${HELM_DOCS_VERSION}
 
 # Install Trivy
 # renovate: datasource=github-releases depName=aquasecurity/trivy
-ARG TRIVY_VERSION=0.73.0
+ARG TRIVY_VERSION=0.74.0
 RUN case ${TARGETARCH} in \
         "amd64")  TRIVY_ARCH=64bit   ;; \
         "arm64")  TRIVY_ARCH=ARM64   ;; \
