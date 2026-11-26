@@ -1,5 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "prHourlyLimit and prConcurrentLimit are 0 (unlimited) on purpose. Renovate's defaults are 2 PRs per hour and 10 concurrent, and this bot runs once a day, so a backlog surfaces only two PRs per run: 8 queued updates took four days to appear, two at a time. That reads as 'a new wave of PRs every few days' when in fact they were queued the whole time and nothing new was released. home2673923/automation has run with both at 0 for a long time and drains its queue in a single run.",
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0,
+  "branchConcurrentLimit": 0,
   "assignees": [
     "jorisdejosselin"
   ],
@@ -9,7 +13,6 @@
   "baseBranches": [
     "develop"
   ],
-  "branchConcurrentLimit": 10,
   "commitMessageAction": "update",
   "commitMessageExtra": "to {{newValue}}",
   "commitMessagePrefix": "chore(deps): ",
@@ -199,8 +202,6 @@
   ],
   "platformAutomerge": true,
   "prBodyTemplate": "This PR updates dependencies in the repository.\n\n{{#if hasReleaseNotes}}\n## Release Notes\n{{{releaseNotes}}}\n{{/if}}\n\n{{#if hasErrors}}\n## Errors\n{{{errors}}}\n{{/if}}\n\n---\n\n\ud83e\udd16 This PR was generated automatically by Renovate Bot.",
-  "prConcurrentLimit": 5,
-  "prHourlyLimit": 3,
   "pre-commit": {
     "enabled": true
   },
