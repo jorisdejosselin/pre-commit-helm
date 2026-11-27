@@ -1,6 +1,5 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "prHourlyLimit and prConcurrentLimit are 0 (unlimited) on purpose. Renovate's defaults are 2 PRs per hour and 10 concurrent, and this bot runs once a day, so a backlog surfaces only two PRs per run: 8 queued updates took four days to appear, two at a time. That reads as 'a new wave of PRs every few days' when in fact they were queued the whole time and nothing new was released. home2673923/automation has run with both at 0 for a long time and drains its queue in a single run.",
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
   "branchConcurrentLimit": 0,
@@ -43,7 +42,7 @@
   "dependencyDashboard": true,
   "dependencyDashboardAutoclose": true,
   "dependencyDashboardTitle": "\ud83d\udd04 Dependency Updates Dashboard",
-  "description": "Renovate configuration for jorisdejosselin/pre-commit-helm repository",
+  "description": ["Renovate configuration for jorisdejosselin/pre-commit-helm repository", "prHourlyLimit and prConcurrentLimit are 0 (unlimited) on purpose. Renovate's defaults are 2 PRs per hour and 10 concurrent, and this bot runs once a day, so a backlog surfaces only two PRs per run: 8 queued updates took four days to appear, two at a time. That reads as 'a new wave of PRs every few days' when in fact they were queued the whole time and nothing new was released. home2673923/automation has run with both at 0 for a long time and drains its queue in a single run."],
   "enabledManagers": [
     "pre-commit",
     "github-actions",
