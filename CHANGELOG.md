@@ -1,3 +1,10 @@
+## [1.1.8](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.7...v1.1.8) (2026-11-27)
+
+
+### Bug Fixes
+
+* **renovate:** merge the duplicate description key ([ec51fb9](https://github.com/jorisdejosselin/pre-commit-helm/commit/ec51fb9ec851e89cbb08be79d3d7d55d06a45613))
+
 ## [1.1.7](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.6...v1.1.7) (2026-11-26)
 
 ## [1.1.6](https://github.com/jorisdejosselin/pre-commit-helm/compare/v1.1.5...v1.1.6) (2026-08-31)
